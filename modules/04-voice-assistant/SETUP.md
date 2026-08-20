@@ -33,9 +33,14 @@ pm2 start --name voice-worker --interpreter ./.venv/bin/python -- -m bot start
 
 ## 4. Сайт
 
-- `web/voice-widget.js` и `web/voice-widget.css` — в статику сайта;
-- `web/api/voice-token.js` — в папку `api/` проекта сайта;
-- `livekit-server-sdk` — в зависимости сайта;
+Подключение зависит от того, на чём собран сайт, поэтому варианты лежат готовыми:
+[web/install/README.md](web/install/README.md) — таблица «что в корне проекта → какой
+рецепт», дальше точные пути файлов. Покрыты Next.js в обоих роутингах, Vite, Astro,
+чистая статика и Netlify.
+
+Общее для всех вариантов:
+
+- `livekit-server-sdk` — в зависимости сайта, `livekit-client` — если есть сборка;
 - переменные окружения проекта сайта: `LIVEKIT_URL`, `LIVEKIT_API_KEY`,
   `LIVEKIT_API_SECRET`, `VOICE_AGENT_NAME`.
 

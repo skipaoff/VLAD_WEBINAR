@@ -12,6 +12,10 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
 }
 
+/* Атрибут hidden обязан побеждать: у .vw-launcher и .vw-status свой display,
+   а он специфичнее правила [hidden] из браузера — без этого кнопка не прячется. */
+.vw-root [hidden] { display: none !important; }
+
 .vw-launcher {
   display: inline-flex;
   align-items: center;

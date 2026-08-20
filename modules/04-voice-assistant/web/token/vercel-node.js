@@ -1,5 +1,6 @@
-// Выдача короткоживущего токена на разговор. Кладётся в api/ проекта сайта —
-// Vercel поднимает это как serverless-функцию по адресу /api/voice-token.
+// Выдача короткоживущего токена на разговор — вариант для Vercel и Next.js Pages Router.
+// Копируется как api/voice-token.js (статика и Vite) или pages/api/voice-token.js (Next Pages).
+// Для Next.js App Router используй next-app-route.ts, для Netlify — netlify-function.js.
 //
 // Инварианты:
 // - LIVEKIT_API_SECRET и GEMINI_API_KEY живут только на сервере; в браузер уходит

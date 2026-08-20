@@ -89,9 +89,37 @@ def test_no_secrets_committed() -> None:
             continue
         if any(part in {".venv", "__pycache__", "node_modules", ".git"} for part in path.parts):
             continue
-        if path.suffix not in {".py", ".js", ".json", ".md", ".txt", ".css", ".example"}:
+        if path.suffix not in {".py", ".js", ".jsx", ".ts", ".tsx", ".json", ".md", ".txt", ".css", ".example"}:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         for pattern in SECRET_HINTS:
             found = pattern.search(text)
             assert not found, f"похоже на секрет в {path.relative_to(MODULE_ROOT)}: {found.group()[:20]}…"
+
+
+# ─── рецепты подключения ────────────────────────────────────────────────
+INSTALL_DIR = MODULE_ROOT / "web" / "install"
+WEB_PATH = re.compile(r"web/[\w./-]+\.(?:jsx|tsx|css|ts|js)(?![\w])")
+
+
+def test_install_recipes_exist() -> None:
+    """Под каждый стек лежит готовый рецепт — агенту нечего изобретать."""
+    expected = {
+        "README.md",
+        "static-html.md",
+        "next-app-router.md",
+        "next-pages-router.md",
+        "vite-react.md",
+        "other.md",
+    }
+    actual = {p.name for p in INSTALL_DIR.glob("*.md")}
+    assert expected <= actual, f"нет рецептов: {sorted(expected - actual)}"
+
+
+@pytest.mark.parametrize(
+    "recipe", sorted(INSTALL_DIR.glob("*.md")), ids=lambda p: p.name
+)
+def test_recipe_paths_are_real(recipe: Path) -> None:
+    """Каждый файл, на который ссылается рецепт, действительно лежит в модуле."""
+    for rel in set(WEB_PATH.findall(recipe.read_text(encoding="utf-8"))):
+        assert (MODULE_ROOT / rel).is_file(), f"{recipe.name} ссылается на {rel}, а его нет"
