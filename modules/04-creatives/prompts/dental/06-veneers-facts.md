@@ -3,10 +3,10 @@
 **Что на выходе:** девушка по центру на белом, за ней синяя волна, огромный заголовок сверху. Самый «рекламный» кадр в базе — хорошо идёт в таргет, а не только в ленту.
 
 **Текст на картинке:** `FACTS ABOUT VENEERS`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a finished photorealistic vertical 4:5 social media advertisement for a modern dental
+Create a finished photorealistic vertical 9:16 social media advertisement for a modern dental
 clinic about dental veneers.
 
 SCENE:

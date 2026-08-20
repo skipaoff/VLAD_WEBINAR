@@ -3,11 +3,11 @@
 **Что на выходе:** врач по центру, синяя полоса со специальностью проходит за ним, подпись серии внизу. Парная карточка к девятой — из них собирается раздел «команда».
 
 **Текст на картинке:** `DENTAL SURGEON` + имя врача + `OUR DOCTORS`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 **Нужно от бизнеса:** имя врача и специальность.
 
 ```text
-Create a finished photorealistic vertical 4:5 social media advertising post introducing a male
+Create a finished photorealistic vertical 9:16 social media advertising post introducing a male
 dental surgeon for a contemporary dental clinic.
 
 ART DIRECTION:
@@ -81,7 +81,7 @@ preserve the blue horizontal band, leave the bottom headline zone clean, and add
 post-production.
 
 COMPOSITION:
-vertical 4:5; doctor slightly right of center; doctor occupies approximately 45–50% of image
+vertical 9:16; doctor slightly right of center; doctor occupies approximately 45–50% of image
 width; head approximately in upper-middle region; blue band cuts horizontally across the middle
 third; left-side text block balances the portrait; large clean white area at top; campaign
 headline centered at bottom.

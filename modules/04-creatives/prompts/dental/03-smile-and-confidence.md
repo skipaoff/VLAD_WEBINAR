@@ -3,10 +3,10 @@
 **Что на выходе:** портрет справа, слева пустое поле и заголовок в облачке-выноске. Полезный пост «почему это важно», хорошо собирает сохранения.
 
 **Текст на картинке:** `SMILE AND CONFIDENCE: WHY THEY ARE LINKED`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a vertical Instagram post, 4:5, 1080x1350, for a dental clinic in a soft
+Create a vertical Instagram post, 9:16, 1080x1920, for a dental clinic in a soft
 educational/lifestyle style.
 
 Composition:

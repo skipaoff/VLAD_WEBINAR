@@ -3,10 +3,10 @@
 **Что на выходе:** карточка бренда — инструменты на белом сверху, плотная синяя плашка с названием снизу. Держит ленту вместе, ставится раз в неделю-две.
 
 **Текст на картинке:** `{{BRAND}} LABORATORY`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a vertical Instagram post, 4:5, 1080x1350, in a professional medical/dental social media
+Create a vertical Instagram post, 9:16, 1080x1920, in a professional medical/dental social media
 style with strong blue branding.
 
 Composition:

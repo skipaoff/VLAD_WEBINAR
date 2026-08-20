@@ -3,11 +3,11 @@
 **Что на выходе:** карточка знакомства с врачом: портрет слева, имя и специальность справа, крупная подпись серии внизу. Собирает доверие лучше любого текста про опыт.
 
 **Текст на картинке:** имя врача + `ORTHODONTIST` + `OUR DOCTORS`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 **Нужно от бизнеса:** имя врача и специальность.
 
 ```text
-Create a finished photorealistic vertical 4:5 social media advertising post introducing a female
+Create a finished photorealistic vertical 9:16 social media advertising post introducing a female
 orthodontist for a modern dental clinic.
 
 REFERENCE ART DIRECTION:
@@ -48,7 +48,7 @@ on glasses and metal instrument; premium commercial portrait retouching.
 Do not make skin plastic or over-smoothed.
 
 COMPOSITION:
-vertical 4:5; female doctor occupies approximately 48–52% of total frame; subject placed
+vertical 9:16; female doctor occupies approximately 48–52% of total frame; subject placed
 left-of-center; her head around the upper-middle portion of frame; large clean negative space on
 the RIGHT SIDE for information; bottom 20–25% reserved for large campaign title.
 Keep generous breathing room around all graphic elements.

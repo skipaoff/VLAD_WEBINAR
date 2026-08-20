@@ -3,10 +3,10 @@
 **Что на выходе:** улыбка крупным планом, разделённая пополам — слева свой оттенок, справа после отбеливания. Разница видна без единого слова, поэтому пост работает даже в ленте на пролистывании.
 
 **Текст на картинке:** `TEETH WHITENING`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a finished photorealistic vertical 4:5 commercial dental advertisement illustrating
+Create a finished photorealistic vertical 9:16 commercial dental advertisement illustrating
 professional teeth whitening through one bold surreal visual metaphor.
 
 BACKGROUND:
@@ -39,7 +39,7 @@ If text accuracy cannot be guaranteed, create the white headline plaque blank an
 space to add text later.
 
 COMPOSITION:
-vertical 4:5; central symmetry; headline approximately around upper-middle; smile hero around
+vertical 9:16; central symmetry; headline approximately around upper-middle; smile hero around
 center; large amount of clean white negative space in lower third.
 
 DEPTH DETAILS:

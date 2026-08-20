@@ -3,10 +3,10 @@
 **Что на выходе:** кадр самой процедуры с синей лампой, снизу синяя плашка с заголовком. Пост-возражение: снимает страх до того, как человек спросит.
 
 **Текст на картинке:** `FEARS ABOUT TEETH WHITENING`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a vertical Instagram post, 4:5, 1080x1350, in a clean dental educational style with a
+Create a vertical Instagram post, 9:16, 1080x1920, in a clean dental educational style with a
 stronger photo-led composition.
 
 Composition:

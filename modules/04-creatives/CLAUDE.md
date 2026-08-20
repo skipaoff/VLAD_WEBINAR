@@ -52,7 +52,7 @@ mkdir -p creatives
 # по одному на каждый выбранный номер, без --wait: команда сразу вернёт id задачи
 higgsfield generate create nano_banana_pro \
   --prompt "$(cat creatives/06.prompt.txt)" \
-  --aspect-ratio 4:5 --resolution 2k
+  --aspect-ratio 9:16 --resolution 2k
 ```
 
 Собери id всех задач и дождись их:
@@ -61,8 +61,10 @@ higgsfield generate create nano_banana_pro \
 higgsfield generate wait <job_id> --interval 5s
 ```
 
-Модель — `nano_banana_pro`: она держит 4:5 и лучше остальных рисует текст. Не подменяй её на
-`gpt_image_2` — у него нет 4:5.
+Модель по умолчанию — `nano_banana_pro`. Флаг соотношения обязателен: без него получится
+квадрат, а `auto` CLI не принимает.
+Если на готовой картинке поехал текст — перезапусти этот же промпт на `gpt_image_2` с тем же
+`--aspect-ratio 9:16`. Промпт при этом не переписывай.
 
 Скачай результаты в `creatives/` с понятными именами: `06-veneers-facts.png`.
 

@@ -3,10 +3,10 @@
 **Что на выходе:** имплант крупным планом как товар в рекламе, синий фон, заголовок справа. Продающий пост под конкретную услугу с высоким чеком.
 
 **Текст на картинке:** `IMPLANTS: MYTHS AND FACTS`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a vertical Instagram post, 4:5, 1080x1350, for a dental clinic in a strong service-focused
+Create a vertical Instagram post, 9:16, 1080x1920, for a dental clinic in a strong service-focused
 product-hero style.
 
 Composition:

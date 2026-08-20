@@ -3,10 +3,10 @@
 **Что на выходе:** портрет улыбающейся девушки на светло-голубом фоне, крупный заголовок сверху, много воздуха. Пост-настроение, не про услугу — чтобы лента не выглядела как прайс.
 
 **Текст на картинке:** `A SMILE IS «CONTAGIOUS» :)`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a vertical Instagram post, 4:5, 1080x1350, in a clean modern dental social media style.
+Create a vertical Instagram post, 9:16, 1080x1920, in a clean modern dental social media style.
 Design a promotional post for a dental clinic with a soft pale blue and white color palette,
 minimal medical aesthetic, flat graphic elements, and realistic photography.
 

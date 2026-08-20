@@ -3,10 +3,10 @@
 **Что на выходе:** четыре зубные щётки стоят как колонны, за ними гигантское слово. Самый необычный кадр в базе — им хорошо разбавлять ленту из портретов.
 
 **Текст на картинке:** `MYTHS` + плашка `ABOUT BRUSHING TEETH`
-**Формат:** 4:5, 1080×1350
+**Формат:** 9:16, 1080×1920
 
 ```text
-Create a finished vertical 4:5 commercial advertising visual for a contemporary dental clinic
+Create a finished vertical 9:16 commercial advertising visual for a contemporary dental clinic
 about myths surrounding tooth brushing.
 
 CORE CONCEPT:
