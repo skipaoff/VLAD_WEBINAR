@@ -1,0 +1,11 @@
+.env
+.env.local
+*.log
+logs/
+leads.jsonl
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+.DS_Store
