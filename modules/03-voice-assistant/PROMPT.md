@@ -10,7 +10,7 @@
 и доводил до записи.
 
 Готовое решение лежит здесь, изобретать ничего не нужно:
-https://github.com/skipaoff/VLAD_WEBINAR/tree/main/modules/04-voice-assistant
+https://github.com/skipaoff/VLAD_WEBINAR/tree/main/modules/03-voice-assistant
 
 Забери репозиторий, открой в нём CLAUDE.md и делай строго по нему.
 Коротко, что там будет:

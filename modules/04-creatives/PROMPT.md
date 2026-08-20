@@ -8,9 +8,9 @@
 креативы под его нишу.
 
 Готовая база промптов лежит здесь:
-https://github.com/skipaoff/VLAD_WEBINAR/tree/main/modules/05-creatives
+https://github.com/skipaoff/VLAD_WEBINAR/tree/main/modules/04-creatives
 
-Забери репозиторий, открой modules/05-creatives/CLAUDE.md и делай
+Забери репозиторий, открой modules/04-creatives/CLAUDE.md и делай
 по нему. Коротко, что там:
 
 1. Покажи мне таблицу постов из базы под нужную нишу: номер,

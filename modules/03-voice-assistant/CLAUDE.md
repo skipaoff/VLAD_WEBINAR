@@ -83,7 +83,7 @@ curl -X POST https://САЙТ/api/voice-token
 ## Шаг 5. Проверь себя
 
 ```bash
-cd modules/04-voice-assistant && python3 -m pytest -q tests
+cd modules/03-voice-assistant && python3 -m pytest -q tests
 ```
 
 Тест падает, если осталась хоть одна незаполненная метка, если конфиг битый или если в

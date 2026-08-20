@@ -15,7 +15,7 @@
 ## 3. Воркер
 
 ```bash
-cd modules/04-voice-assistant/worker
+cd modules/03-voice-assistant/worker
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 cp .env.example .env        # вписать ключи
@@ -52,7 +52,7 @@ pm2 start --name voice-worker --interpreter ./.venv/bin/python -- -m bot start
 Всё, что ассистент забрал в разговоре, ложится строкой в `worker/leads.jsonl`:
 
 ```bash
-tail -f modules/04-voice-assistant/worker/leads.jsonl
+tail -f modules/03-voice-assistant/worker/leads.jsonl
 ```
 
 В эфире это удобный кадр: ведущий диктует телефон голосом, а на экране в реальном времени

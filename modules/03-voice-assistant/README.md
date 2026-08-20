@@ -56,7 +56,7 @@ Astro, чистая статика и Netlify. Для всего остальн�
 ## Проверка перед эфиром
 
 ```bash
-cd modules/04-voice-assistant && python3 -m pytest -q tests
+cd modules/03-voice-assistant && python3 -m pytest -q tests
 ```
 
 **На чистом шаблоне тест красный — это нормально.** Он зеленеет, когда все метки `{{...}}`
