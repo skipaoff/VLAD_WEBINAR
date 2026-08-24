@@ -1,0 +1,9 @@
+# Голосовой воркер: LiveKit Agents + Gemini Live (речь-в-речь, один WebSocket).
+# Ставить в отдельный venv на той машине, где воркер будет крутиться.
+#
+# Запуск:  cd worker && python -m bot start
+
+livekit-agents>=1.5.17
+livekit-plugins-google>=1.5.0
+python-dotenv>=1.2.2,<2.0
+pydantic>=2.6,<3.0

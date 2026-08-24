@@ -1,0 +1,18 @@
+{
+  "kb_root": "kb",
+  "kb_files": [
+    "01-soul.md",
+    "02-product.md",
+    "03-pricing.md",
+    "04-rules.md"
+  ],
+  "llm_model": "gemini-3.1-flash-live-preview",
+  "voice": "Kore",
+  "language": "ru",
+  "greeting": "{{ПРИВЕТСТВИЕ ОДНОЙ ФРАЗОЙ}}",
+  "agent_name": "{{ИМЯ-АГЕНТА-ЛАТИНИЦЕЙ}}",
+  "max_tokens_per_reply": 250,
+  "max_session_duration_sec": 300,
+  "log_path": "logs/voice.log",
+  "leads_path": "leads.jsonl"
+}

@@ -1,0 +1,4 @@
+# Продавец в Telegram. Три зависимости — больше не нужно.
+anthropic>=0.89
+requests>=2.31
+python-dotenv>=1.0

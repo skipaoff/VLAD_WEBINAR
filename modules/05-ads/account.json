@@ -1,0 +1,18 @@
+{
+  "business_name": "{{НАЗВАНИЕ БИЗНЕСА}}",
+  "site_url": "{{ССЫЛКА НА САЙТ}}",
+  "city": "{{ГОРОД}}",
+  "city_key": "{{КЛЮЧ ГОРОДА ИЗ ПОИСКА}}",
+  "radius_km": 15,
+  "country_code": "{{КОД СТРАНЫ}}",
+  "language": "{{ЯЗЫК ТЕКСТОВ ОБЪЯВЛЕНИЙ}}",
+  "page_id": "{{ID СТРАНИЦЫ FACEBOOK}}",
+  "instagram_id": "{{ID INSTAGRAM ИЛИ нет}}",
+  "currency": "{{ВАЛЮТА КАБИНЕТА}}",
+  "timezone": "{{ЧАСОВОЙ ПОЯС КАБИНЕТА}}",
+  "daily_budget": 20,
+  "age_min": 25,
+  "age_max": 55,
+  "genders": "все",
+  "audience_notes": "{{КТО КЛИЕНТЫ ОДНОЙ СТРОКОЙ}}"
+}
