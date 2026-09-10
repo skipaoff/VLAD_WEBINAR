@@ -32,8 +32,8 @@ description: Пошаговая сборка сайта клиники с пок
 
 ```json
 {
-  "clinic": "Comfort Dental",
-  "subtitle": "сімейна стоматологія на Троєщині, comfort-stom.kiev.ua",
+  "clinic": "Назва клініки",
+  "subtitle": "сімейна стоматологія, місто, site.example",
   "site": null,
   "folder": "сайт/",
   "updated": "31.08, 17:20",
