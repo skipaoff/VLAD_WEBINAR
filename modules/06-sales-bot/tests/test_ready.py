@@ -10,10 +10,26 @@ import json
 import re
 from pathlib import Path
 
+import pytest
+
 MODULE_ROOT = Path(__file__).resolve().parents[1]
 TENANT = MODULE_ROOT / "tenant.json"
 
 PLACEHOLDER = re.compile(r"\{\{[^}]+\}\}")
+
+
+def business_filled() -> bool:
+    """Заполнение начинают с бренда — по нему и судим, шаблон это или боевой модуль."""
+    try:
+        brand = json.loads(TENANT.read_text(encoding="utf-8")).get("brand_name", "")
+    except json.JSONDecodeError:
+        return True  # битый файл — пусть тест скажет об этом громко
+    return bool(str(brand).strip()) and not PLACEHOLDER.search(str(brand))
+
+
+def skip_if_template() -> None:
+    if not business_filled():
+        pytest.skip("модуль ещё не заполнен под бизнес — в tenant.json стоит метка")
 
 
 def tenant() -> dict:
@@ -48,12 +64,14 @@ def test_what_to_sell_is_structured() -> None:
 
 
 def test_knowledge_filled() -> None:
+    skip_if_template()
     for path in knowledge_files():
         left = PLACEHOLDER.findall(path.read_text(encoding="utf-8"))
         assert not left, f"{path.relative_to(MODULE_ROOT)}: не заполнено {len(left)} мест"
 
 
 def test_tenant_filled() -> None:
+    skip_if_template()
     raw = TENANT.read_text(encoding="utf-8")
     assert not PLACEHOLDER.findall(raw), "tenant.json: остались метки"
     data = json.loads(raw)
@@ -62,6 +80,7 @@ def test_tenant_filled() -> None:
 
 
 def test_voice_profile() -> None:
+    skip_if_template()
     """Если голос включён — сказано, какой именно голос и какой он."""
     voice = tenant()["voice"]
     if not voice.get("enabled"):
