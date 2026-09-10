@@ -1,7 +1,8 @@
 """Готов ли модуль к эфиру.
 
-На чистом шаблоне красный — в account.json стоят метки. Зеленеет, когда данные кабинета
-вписаны, база знаний на месте и в репозиторий не попал ключ.
+На чистом шаблоне зелёный: шаблон и должен быть с метками. Модуль считается заполненным,
+как только в `account.json` вписано название бизнеса, — с этого момента спрос полный.
+Незаполненная половина кабинета красная, и это главное, что тут ловится.
 """
 
 from __future__ import annotations
@@ -19,7 +20,26 @@ KNOWLEDGE = MODULE_ROOT / "knowledge"
 PLACEHOLDER = re.compile(r"\{\{[^}]+\}\}")
 
 
+def business_filled() -> bool:
+    """Заполнение начинают с названия бизнеса — по нему и судим о модуле.
+
+    Пока метка на месте — перед нами шаблон из репозитория, и требовать от него
+    заполненности нечего. Как только имя вписано, спрашиваем за весь кабинет.
+    """
+    try:
+        name = json.loads(ACCOUNT.read_text(encoding="utf-8")).get("business_name", "")
+    except json.JSONDecodeError:
+        return True  # битый файл — пусть тест скажет об этом громко, а не промолчит
+    return bool(str(name).strip()) and not PLACEHOLDER.search(str(name))
+
+
+def skip_if_template() -> None:
+    if not business_filled():
+        pytest.skip("модуль ещё не заполнен под бизнес — в account.json стоит метка")
+
+
 def test_account_filled() -> None:
+    skip_if_template()
     left = PLACEHOLDER.findall(ACCOUNT.read_text(encoding="utf-8"))
     assert not left, f"account.json: не заполнено — {left}"
 

@@ -1,0 +1,12 @@
+.env
+state/*.json
+session/*
+!session/.gitkeep
+*.session
+*.session-journal
+logs/
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.benchmarks/

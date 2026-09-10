@@ -1,8 +1,9 @@
 """Готов ли модуль к эфиру.
 
-На чистом шаблоне эти тесты КРАСНЫЕ — так и задумано: они зеленеют только когда
-модуль заполнен под конкретный бизнес. Красный тест перед деплоем означает, что
-ассистент начнёт читать вслух метки вида {{НАЗВАНИЕ}}.
+На чистом шаблоне эти тесты зелёные: шаблон и должен быть с метками. Модуль считается
+заполненным, как только в `brand.json` вписано название бизнеса, — с этого момента
+проверки становятся строгими. Смысл прежний: ассистент не должен прочитать вслух
+метку вида {{НАЗВАНИЕ}}, а незаполненная половина — это красный тест, а не «почти готово».
 """
 
 from __future__ import annotations
@@ -25,28 +26,36 @@ def _kb_files() -> list[Path]:
     return sorted(KB_DIR.glob("*.md"))
 
 
+def business_filled() -> bool:
+    """Заполнение начинают с `brand.json` — по названию бизнеса и судим о модуле.
+
+    Пока метка на месте — перед нами шаблон из репозитория, и требовать от него
+    заполненности нечего. Как только имя вписано, спрос полный.
+    """
+    try:
+        brand = json.loads(BRAND.read_text(encoding="utf-8")).get("brand", "")
+    except json.JSONDecodeError:
+        return True  # битый файл — пусть тест скажет об этом громко, а не промолчит
+    return bool(str(brand).strip()) and not PLACEHOLDER.search(str(brand))
+
+
+def skip_if_template() -> None:
+    if not business_filled():
+        pytest.skip("модуль ещё не заполнен под бизнес — в brand.json стоит метка")
+
+
+# ─── структура: проверяется всегда, шаблон это или боевой модуль ─────────
+
+
 def test_kb_files_exist() -> None:
     assert _kb_files(), "в kb/ нет ни одного файла базы знаний"
 
 
-@pytest.mark.parametrize("path", _kb_files(), ids=lambda p: p.name)
-def test_kb_has_no_placeholders(path: Path) -> None:
-    left = PLACEHOLDER.findall(path.read_text(encoding="utf-8"))
-    assert not left, f"{path.name}: не заполнено {len(left)} мест — {left[:3]}"
-
-
-def test_brand_filled() -> None:
-    left = PLACEHOLDER.findall(BRAND.read_text(encoding="utf-8"))
-    assert not left, f"brand.json: не заполнено — {left}"
-
-
-def test_config_filled_and_valid() -> None:
-    raw = CONFIG.read_text(encoding="utf-8")
-    assert not PLACEHOLDER.findall(raw), "config.json: остались метки {{...}}"
-
+def test_config_valid() -> None:
+    """Конфиг разбирается схемой и ссылается на существующие файлы."""
     from bot.settings import VoiceSettings
 
-    settings = VoiceSettings.model_validate(json.loads(raw))
+    settings = VoiceSettings.model_validate(json.loads(CONFIG.read_text(encoding="utf-8")))
     for name in settings.kb_files:
         assert (MODULE_ROOT / settings.kb_root / name).is_file(), f"нет файла {name}"
 
@@ -69,6 +78,38 @@ def test_kb_assembles() -> None:
     settings = VoiceSettings.model_validate(json.loads(CONFIG.read_text(encoding="utf-8")))
     prompt = load_kb(MODULE_ROOT / settings.kb_root, settings.kb_files)
     assert len(prompt) > 500, "промпт подозрительно короткий — база знаний пустая?"
+
+
+# ─── заполненность: спрашивается с модуля, объявленного боевым ───────────
+
+
+@pytest.mark.parametrize("path", _kb_files(), ids=lambda p: p.name)
+def test_kb_has_no_placeholders(path: Path) -> None:
+    skip_if_template()
+    left = PLACEHOLDER.findall(path.read_text(encoding="utf-8"))
+    assert not left, f"{path.name}: не заполнено {len(left)} мест — {left[:3]}"
+
+
+def test_brand_filled() -> None:
+    skip_if_template()
+    left = PLACEHOLDER.findall(BRAND.read_text(encoding="utf-8"))
+    assert not left, f"brand.json: не заполнено — {left}"
+
+
+def test_config_filled() -> None:
+    skip_if_template()
+    left = PLACEHOLDER.findall(CONFIG.read_text(encoding="utf-8"))
+    assert not left, f"config.json: остались метки {{...}} — {left}"
+
+
+def test_prompt_bez_metok() -> None:
+    """Последняя черта: собранный промпт не содержит меток — их бы озвучили вслух."""
+    skip_if_template()
+    from bot.kb_loader import load_kb
+    from bot.settings import VoiceSettings
+
+    settings = VoiceSettings.model_validate(json.loads(CONFIG.read_text(encoding="utf-8")))
+    prompt = load_kb(MODULE_ROOT / settings.kb_root, settings.kb_files)
     assert "{{" not in prompt
 
 

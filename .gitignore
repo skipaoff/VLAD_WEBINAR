@@ -13,3 +13,8 @@ node_modules/
 creatives/
 state/*.json
 .venv/
+session/
+leads.csv
+state/*.json
+state/*.jsonl
+state/log.txt
