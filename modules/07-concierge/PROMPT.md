@@ -6,9 +6,9 @@
 Мы собрали клиенту всё: сайт, ассистента, креативы, рекламу и продавца.
 Теперь покажем, что это можно продавать не по одному, а сразу десятерым.
 
-Модуль: https://github.com/skipaoff/VLAD_WEBINAR/tree/main/modules/08-concierge
+Модуль: https://github.com/skipaoff/VLAD_WEBINAR/tree/main/modules/07-concierge
 
-Забери репозиторий, открой modules/08-concierge/CLAUDE.md и делай строго
+Забери репозиторий, открой modules/07-concierge/CLAUDE.md и делай строго
 по нему. Коротко, что там:
 
 1. Проверь доступ к аккаунту: python concierge.py check

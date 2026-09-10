@@ -12,7 +12,7 @@ my.telegram.org → API development tools → создать приложени�
 Оттуда `TG_API_ID` и `TG_API_HASH`.
 
 ```bash
-cd modules/08-concierge
+cd modules/07-concierge
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp .env.example .env      # вписать два значения
 ```

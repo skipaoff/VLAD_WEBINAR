@@ -67,7 +67,7 @@ leads.csv ──► Claude пишет письмо ──► очередь ─�
 Положи их рядом с модулем:
 
 ```bash
-cd modules/08-concierge
+cd modules/07-concierge
 cp .env.example .env
 ```
 
@@ -179,7 +179,7 @@ Telegram ограничивает аккаунты за сообщения не�
 ## Проверка
 
 ```bash
-cd modules/08-concierge && python3 -m pytest -q tests
+cd modules/07-concierge && python3 -m pytest -q tests
 ```
 
 Тесты следят за предохранителями: лимиты на месте, стоп-слова не потерялись, лишних
