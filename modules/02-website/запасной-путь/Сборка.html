@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сборка сайта клиники</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0c0f; --panel:#131519; --panel2:#181b21; --line:#242833; --ink:#eef1f6; --dim:#8c93a4;
+  --ok:#3ddc97; --run:#5aa9ff; --warn:#ffc14d;
+  --t-tap:120ms; --t-in:280ms; --t-scene:460ms; --e-out:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;box-sizing:border-box}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--ink);padding:22px 26px 30px;
+     font:15px/1.5 Inter,system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+button{color:inherit;appearance:none;background:none;border:0;font:inherit;cursor:pointer}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.gl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700}
+
+/* шапка */
+.top{display:flex;align-items:center;gap:20px;margin-bottom:18px}
+.ring{width:76px;height:76px;flex:0 0 76px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .track{stroke:#1f232c}
+.ring .bar{stroke:var(--ok);stroke-linecap:round;transition:stroke-dashoffset var(--t-scene) var(--e-out)}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+        font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+.who{flex:1;min-width:0}
+.who h1{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.1;
+        white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who p{color:var(--dim);font-size:13.5px;margin-top:4px;
+       white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clock{text-align:right;flex:0 0 auto}
+.clock b{display:block;font-size:23px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.live{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--dim);font-weight:700;margin-top:4px}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:beat 1.7s infinite}
+.live.off i{background:#49505f;animation:none}
+@keyframes beat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+/* раскладка */
+.cols{display:grid;grid-template-columns:352px minmax(0,1fr);gap:20px;align-items:stretch}
+.cols>*{min-width:0}
+@media (max-width:1040px){.cols{grid-template-columns:1fr}}
+
+/* шаги */
+.steps{padding:18px 18px 8px}
+.steps .gl{margin-bottom:14px}
+.step{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;padding:8px 0;position:relative}
+.step+.step::before{content:"";position:absolute;left:12.5px;top:-8px;height:16px;width:1.5px;background:var(--line)}
+.step[data-s="done"]+.step::before{background:var(--ok);opacity:.45}
+.dot{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);display:flex;
+     align-items:center;justify-content:center;font-size:10.5px;font-weight:700;color:#666e80;
+     transition:border-color var(--t-in),background var(--t-in),color var(--t-in)}
+.step[data-s="run"] .dot{border-color:var(--run);color:var(--run);animation:halo 1.9s infinite}
+@keyframes halo{0%{box-shadow:0 0 0 0 rgba(90,169,255,.45)}70%{box-shadow:0 0 0 9px rgba(90,169,255,0)}
+                100%{box-shadow:0 0 0 0 rgba(90,169,255,0)}}
+.step[data-s="done"] .dot{border-color:var(--ok);background:var(--ok);color:#0b0c0f}
+.step[data-s="warn"] .dot{border-color:var(--warn);color:var(--warn)}
+.step h3{font-size:14.5px;font-weight:600;line-height:1.3;color:#c9cedb}
+.step[data-s="wait"] h3{color:#5f6779}
+.step[data-s="run"] h3{color:#fff}
+.step[data-s="done"] h3{color:#c9cedb}
+.step small{display:block;font-size:12.5px;color:var(--dim);margin-top:2px;line-height:1.35}
+.step[data-s="wait"] small{color:#4e5464}
+.tick{stroke:#0b0c0f;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;
+      stroke-dasharray:15;stroke-dashoffset:15;animation:draw .36s var(--e-out) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* сцена */
+.scene{padding:22px 24px;min-height:420px;display:flex;flex-direction:column}
+.scene h2{font-size:27px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:12px 0 6px}
+.scene .lead{color:var(--dim);font-size:14.5px;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+      font-size:13px;color:#d5dae5;opacity:0;transform:translateY(8px);
+      animation:pop var(--t-in) var(--e-out) forwards}
+.chip b{color:#fff;font-weight:700}
+@keyframes pop{to{opacity:1;transform:none}}
+.items{margin-top:20px;display:grid;gap:9px}
+.item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#c5cbd8;
+      opacity:0;transform:translateY(8px);animation:pop var(--t-in) var(--e-out) forwards}
+.item i{width:17px;height:17px;flex:0 0 17px;border-radius:50%;border:1.5px solid var(--line);
+        margin-top:3px;display:flex;align-items:center;justify-content:center}
+.item[data-s="done"] i{background:var(--ok);border-color:var(--ok)}
+.item[data-s="run"] i{border-color:var(--run);animation:halo 1.9s infinite}
+.item[data-s="warn"] i{border-color:var(--warn)}
+.item[data-s="wait"]{color:#697183}
+.num{margin-top:auto;padding-top:22px;display:flex;gap:26px;flex-wrap:wrap}
+.num div b{display:block;font-size:31px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.num div span{font-size:12px;color:var(--dim)}
+
+/* превью сайта */
+.prev{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+.prevhead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}
+.tabs{display:flex;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px}
+.tabs button{padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--dim);
+             transition:background var(--t-tap),color var(--t-tap)}
+.tabs button[aria-selected="true"]{background:#262b36;color:#fff}
+.frame{margin:0 auto;max-width:100%;background:#000;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+       transition:width var(--t-scene) var(--e-out),height var(--t-scene) var(--e-out)}
+.frame iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.prev a{font-size:13px;color:var(--run);text-decoration:none}
+.prev a:hover{text-decoration:underline}
+
+/* лента */
+.log{margin-top:20px;padding:16px 20px;max-height:190px;overflow:auto}
+.log .gl{margin-bottom:12px}
+.line{display:flex;gap:12px;font-size:13.5px;padding:5px 0;color:#c3c9d6;
+      opacity:0;transform:translateY(6px);animation:pop var(--t-in) var(--e-out) forwards}
+.line time{color:#5f6779;font-variant-numeric:tabular-nums;flex:0 0 46px}
+
+/* пусто и скелет */
+.wait{color:var(--dim);font-size:14px}
+.sk{height:13px;border-radius:7px;background:linear-gradient(90deg,#191c23,#22262f,#191c23);
+    background-size:200% 100%;animation:sh 1.4s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .chip,.item,.line{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="ring">
+    <svg width="76" height="76" viewBox="0 0 76 76">
+      <circle class="track" cx="38" cy="38" r="33" fill="none" stroke-width="6"></circle>
+      <circle id="bar" class="bar" cx="38" cy="38" r="33" fill="none" stroke-width="6"
+              stroke-dasharray="207.3" stroke-dashoffset="207.3"></circle>
+    </svg>
+    <b id="pct">0%</b>
+  </div>
+  <div class="who">
+    <h1 id="clinic">Ждём запуск</h1>
+    <p id="sub">Скажите Claude «сделай сайт», и здесь появится каждый шаг</p>
+  </div>
+  <div class="clock">
+    <b id="elapsed">00:00</b>
+    <span class="live off" id="live"><i></i><span id="livet">нет связи</span></span>
+  </div>
+</div>
+
+<div class="cols">
+  <aside class="panel steps">
+    <div class="gl">Этапы</div>
+    <div id="steps"></div>
+  </aside>
+
+  <main class="panel scene">
+    <div class="gl">Сейчас в работе</div>
+    <h2 id="sceneTitle">Готов к запуску</h2>
+    <p class="lead" id="sceneNote">Страница обновляется сама, пока идёт сборка.</p>
+    <div class="chips" id="chips"></div>
+    <div class="items" id="items"></div>
+    <div class="num" id="nums"></div>
+
+    <div class="prev" id="prev" hidden>
+      <div class="prevhead">
+        <div class="gl">Живой сайт</div>
+        <div class="tabs" id="tabs">
+          <button data-w="390" aria-selected="false">Телефон</button>
+          <button data-w="1280" aria-selected="true">Десктоп</button>
+        </div>
+        <a id="prevlink" href="#" target="_blank" rel="noreferrer">Открыть в новой вкладке</a>
+      </div>
+      <div class="frame" id="frame"><iframe id="site" title="Превью сайта"></iframe></div>
+    </div>
+  </main>
+</div>
+
+<div class="panel log">
+  <div class="gl">Что происходило</div>
+  <div id="log"><div class="wait">Пока ничего.</div></div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const RING = 2 * Math.PI * 33;
+let last = '', started = null, lastSeen = 0, deviceW = 1280, phase = 'idle';
+
+/* ---- откуда берём состояние ---------------------------------------------
+   Через сервер работает fetch. Если страницу открыли двойным кликом
+   (file://), fetch запрещён браузером, поэтому подключаем progress.js
+   тегом script: он кладёт то же состояние в window.__BUILD__.        */
+let mode = 'fetch';   // упал один раз, дальше не долбимся в него каждые 700мс
+
+/* Запрос, который завис, не должен останавливать всё окно. */
+function guard(pr, ms) {
+  return new Promise((ok, fail) => {
+    const id = setTimeout(() => fail('долго'), ms);
+    pr.then(v => { clearTimeout(id); ok(v); }, e => { clearTimeout(id); fail(e); });
+  });
+}
+
+function load() {
+  const bust = Date.now();
+  // запись прогона сама считает своё состояние, сеть больше не нужна
+  if (mode === 'player') return Promise.resolve(window.__PLAYER__());
+  const viaScript = () => new Promise((ok, fail) => {
+    const el = document.createElement('script');
+    el.src = 'progress.js?t=' + bust;
+    el.onload = () => {
+      el.remove();
+      if (window.__PLAYER__) { mode = 'player'; ok(window.__PLAYER__()); return; }
+      window.__BUILD__ ? ok(window.__BUILD__) : fail(0);
+    };
+    el.onerror = () => { el.remove(); fail(0); };
+    document.head.appendChild(el);
+  });
+  if (mode === 'script') return guard(viaScript(), 4000);
+  return guard(fetch('progress.json?t=' + bust, { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status)), 4000)
+    .catch(() => { mode = 'script'; return guard(viaScript(), 4000); });
+}
+
+const ST = { wait: 'wait', run: 'run', done: 'done', warn: 'warn' };
+const tick = '<svg width="13" height="13" viewBox="0 0 14 14"><path class="tick" d="M2.5 7.5l3 3 6-6"/></svg>';
+
+function render(d) {
+  const steps = d.steps || [];
+  const done = steps.filter(s => s.status === 'done').length;
+  phase = steps.some(s => s.status === 'run') ? 'run'
+        : (steps.length && done === steps.length ? 'done' : 'idle');
+  const pct = steps.length ? Math.round(done / steps.length * 100) : 0;
+  $('bar').style.strokeDashoffset = RING * (1 - pct / 100);
+  $('pct').textContent = pct + '%';
+
+  if (d.clinic) $('clinic').textContent = d.clinic;
+  if (d.subtitle) $('sub').textContent = d.subtitle;
+
+  $('steps').innerHTML = steps.map((s, i) => {
+    const st = ST[s.status] || 'wait';
+    const mark = st === 'done' ? tick : String(i + 1).padStart(2, '0');
+    return '<div class="step" data-s="' + st + '"><span class="dot">' + mark + '</span>' +
+           '<div><h3>' + esc(s.title) + '</h3>' +
+           (s.hint ? '<small>' + esc(s.hint) + '</small>' : '') + '</div></div>';
+  }).join('') || '<div class="wait">Ждём первый шаг.</div>';
+
+  const cur = steps.find(s => s.id === d.active) || steps.find(s => s.status === 'run')
+           || [...steps].reverse().find(s => s.status === 'done');
+  if (cur) {
+    $('sceneTitle').textContent = cur.title;
+    $('sceneNote').textContent = cur.note || '';
+    $('chips').innerHTML = (cur.chips || []).map((c, i) =>
+      '<span class="chip" style="animation-delay:' + (i * 45) + 'ms">' + esc(c) + '</span>').join('');
+    $('items').innerHTML = (cur.items || []).map((it, i) =>
+      '<div class="item" data-s="' + (ST[it.s] || 'wait') + '" style="animation-delay:' + (i * 55) + 'ms">' +
+      '<i>' + (it.s === 'done' ? tick : '') + '</i><span>' + esc(it.t) + '</span></div>').join('');
+    $('nums').innerHTML = (cur.nums || []).map(n =>
+      '<div><b>' + esc(String(n.v)) + '</b><span>' + esc(n.t) + '</span></div>').join('');
+  }
+
+  const log = d.log || [];
+  $('log').innerHTML = log.length ? log.slice(-40).reverse().map((l, i) =>
+    '<div class="line" style="animation-delay:' + Math.min(i * 30, 300) + 'ms">' +
+    '<time>' + esc(l.t || '') + '</time><span>' + esc(l.m || '') + '</span></div>').join('')
+    : '<div class="wait">Пока ничего.</div>';
+
+  if (d.preview) {
+    $('prev').hidden = false;
+    $('prevlink').href = d.preview;
+    if ($('site').dataset.src !== d.preview) { $('site').src = d.preview; $('site').dataset.src = d.preview; }
+    fit();
+  }
+  if (d.startedAt && !started) started = new Date(d.startedAt).getTime();
+}
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"]/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+/* превью: показываем сайт в рамке телефона или десктопа */
+function fit() {
+  const box = $('prev');
+  if (box.hidden) return;
+  // сначала схлопываем рамку: пока она широкая, колонка не даёт себя измерить
+  const f0 = $('frame'), s0 = $('site');
+  f0.style.width = '0px'; f0.style.height = '0px';
+  s0.style.width = '0px'; s0.style.height = '0px';
+  const avail = box.clientWidth - 2;
+  const h = deviceW === 390 ? 760 : 760;
+  const k = Math.min(1, avail / deviceW);
+  $('frame').style.width = Math.round(deviceW * k) + 'px';
+  $('frame').style.height = Math.round(h * k) + 'px';
+  const f = $('site');
+  f.style.width = deviceW + 'px';
+  f.style.height = h + 'px';
+  f.style.transformOrigin = '0 0';
+  f.style.transform = 'scale(' + k + ')';
+}
+
+$('tabs').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  deviceW = Number(b.dataset.w);
+  [...$('tabs').children].forEach(x => x.setAttribute('aria-selected', String(x === b)));
+  fit();
+});
+addEventListener('resize', fit);
+
+/* часы: считаем от начала прогона, а не от открытия страницы */
+setInterval(() => {
+  if (!started) return;
+  const s = Math.max(0, Math.floor((Date.now() - started) / 1000));
+  const mm = String(Math.floor(s / 60) % 60).padStart(2, '0');
+  const ss = String(s % 60).padStart(2, '0');
+  const hh = Math.floor(s / 3600);
+  $('elapsed').textContent = hh ? hh + ':' + mm + ':' + ss : mm + ':' + ss;
+}, 1000);
+
+/* связь: зелёная точка только когда состояние правда обновляется */
+setInterval(() => {
+  const fresh = Date.now() - lastSeen < 6000;
+  const alive = fresh && phase === 'run';
+  $('live').classList.toggle('off', !alive);
+  $('livet').textContent = !fresh ? 'нет связи'
+    : phase === 'run' ? 'идёт сборка'
+    : phase === 'done' ? 'сайт готов' : 'ожидание';
+}, 1000);
+
+function poll() {
+  load().then(d => {
+    lastSeen = Date.now();
+    const raw = JSON.stringify(d);
+    if (raw !== last) { last = raw; render(d); }
+  }).catch(() => {}).finally(() => setTimeout(poll, 700));
+}
+poll();
+</script>
+</body></html>

@@ -1,0 +1,20 @@
+{
+  "clinic": "Ждём запуск",
+  "subtitle": "Скажите Claude «делаем сайт», и здесь появится каждый шаг",
+  "startedAt": null,
+  "active": null,
+  "preview": null,
+  "steps": [
+    { "id": "dna",       "title": "ДНК клиники",          "hint": "кто она и чем отличается",   "status": "wait" },
+    { "id": "audience",  "title": "Целевая аудитория",    "hint": "кто платит и чего боится",   "status": "wait" },
+    { "id": "rivals",    "title": "Конкуренты рядом",     "hint": "что у них есть и чего нет",  "status": "wait" },
+    { "id": "offer",     "title": "Оффер и первый экран", "hint": "что человек увидит первым",  "status": "wait" },
+    { "id": "structure", "title": "Структура сайта",      "hint": "блоки и их порядок",         "status": "wait" },
+    { "id": "build",     "title": "Сборка по паттерну",   "hint": "каркас, сетка, анимация",    "status": "wait" },
+    { "id": "pages",     "title": "Страницы услуг",       "hint": "прайс, этапы, вопросы",      "status": "wait" },
+    { "id": "contact",   "title": "Запись и мессенджеры", "hint": "куда придёт заявка",         "status": "wait" },
+    { "id": "check",     "title": "Самопроверка",         "hint": "ширины, клики, сборка",      "status": "wait" },
+    { "id": "done",      "title": "Готово",               "hint": "живой сайт в окне",          "status": "wait" }
+  ],
+  "log": []
+}

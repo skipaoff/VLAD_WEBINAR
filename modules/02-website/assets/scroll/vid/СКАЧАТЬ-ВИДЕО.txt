@@ -1,0 +1,19 @@
+Видео скролл-героя в архив не поместилось (16 МБ). Скачай эти восемь файлов
+и положи их сюда, в assets/scroll/vid/
+
+Широкие мастера (для десктопа):
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/vhid.mp4
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/kabinet.mp4
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/vinir.mp4
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/result.mp4
+
+Лёгкие копии (для телефона, обязательны):
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/vhid-m.mp4
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/kabinet-m.mp4
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/vinir-m.mp4
+https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/result-m.mp4
+
+Одной строкой в терминале (Windows PowerShell), из папки assets/scroll/vid:
+
+$b="https://svettutest.github.io/shablony-demo/stomatologia/scroll/vid/"
+"vhid","kabinet","vinir","result" | %{ iwr "$b$_.mp4" -OutFile "$_.mp4"; iwr "$b$_-m.mp4" -OutFile "$_-m.mp4" }

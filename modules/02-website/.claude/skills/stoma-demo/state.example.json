@@ -1,0 +1,60 @@
+{
+  "clinic": "",
+  "subtitle": "",
+  "site": null,
+  "folder": "сайт/",
+  "updated": "",
+  "question": null,
+  "steps": [
+    {
+      "id": "dna",
+      "title": "ДНК клиники",
+      "status": "wait"
+    },
+    {
+      "id": "audience",
+      "title": "Целевая аудитория",
+      "status": "wait"
+    },
+    {
+      "id": "rivals",
+      "title": "Конкуренты рядом",
+      "status": "wait"
+    },
+    {
+      "id": "offer",
+      "title": "Оффер и первый экран",
+      "status": "wait"
+    },
+    {
+      "id": "structure",
+      "title": "Структура сайта",
+      "status": "wait"
+    },
+    {
+      "id": "build",
+      "title": "Сборка по паттерну",
+      "status": "wait"
+    },
+    {
+      "id": "pages",
+      "title": "Страницы услуг",
+      "status": "wait"
+    },
+    {
+      "id": "contact",
+      "title": "Запись и мессенджеры",
+      "status": "wait"
+    },
+    {
+      "id": "check",
+      "title": "Самопроверка",
+      "status": "wait"
+    },
+    {
+      "id": "done",
+      "title": "Готово",
+      "status": "wait"
+    }
+  ]
+}
