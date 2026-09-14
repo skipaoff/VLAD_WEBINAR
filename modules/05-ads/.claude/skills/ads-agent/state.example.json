@@ -11,25 +11,25 @@
       "img": "assets/lica/razrabotchik.png"
     },
     {
-      "name": "Аналитик креатива",
+      "name": "Оценщик видео",
       "skill": "creative-analyzer",
       "status": "wait",
       "img": "assets/lica/analitik.png"
     },
     {
-      "name": "Таргетолог",
+      "name": "Искатель зрителей",
       "skill": "targeting-expert",
       "status": "wait",
       "img": "assets/lica/strateg.png"
     },
     {
-      "name": "Редактор",
+      "name": "Автор текста",
       "skill": "creative-copywriter",
       "status": "wait",
       "img": "assets/lica/kopirayter.png"
     },
     {
-      "name": "Медиабайер",
+      "name": "Планировщик",
       "skill": "campaign-manager · naming-rules",
       "status": "wait",
       "img": "assets/lica/marketolog.png"
@@ -48,23 +48,23 @@
       "status": "wait"
     },
     {
-      "title": "Разбираю креатив",
-      "by": "Аналитик креатива",
+      "title": "Смотрю видео",
+      "by": "Оценщик видео",
       "status": "wait"
     },
     {
-      "title": "Подбираю аудиторию",
-      "by": "Таргетолог",
+      "title": "Ищу, кому показать",
+      "by": "Искатель зрителей",
       "status": "wait"
     },
     {
-      "title": "Пишу объявления",
-      "by": "Редактор",
+      "title": "Пишу текст рекламы",
+      "by": "Автор текста",
       "status": "wait"
     },
     {
-      "title": "Собираю кампанию",
-      "by": "Медиабайер",
+      "title": "Решаю, где и за сколько показывать",
+      "by": "Планировщик",
       "status": "wait"
     },
     {

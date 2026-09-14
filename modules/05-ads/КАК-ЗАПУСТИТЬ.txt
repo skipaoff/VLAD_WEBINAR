@@ -44,10 +44,10 @@ App Secret                там же, Settings → Basic → App Secret
 Шесть субагентов, у каждого свой скилл:
 
 Техник              .claude/skills/account-onboarding/  +  fb-api/
-Аналитик креатива   .claude/skills/creative-analyzer/
-Таргетолог          .claude/skills/targeting-expert/
-Редактор            .claude/skills/creative-copywriter/
-Медиабайер          .claude/skills/campaign-manager/  +  naming-rules/
+Оценщик видео   .claude/skills/creative-analyzer/
+Искатель зрителей          .claude/skills/targeting-expert/
+Автор текста            .claude/skills/creative-copywriter/
+Планировщик          .claude/skills/campaign-manager/  +  naming-rules/
 Контролёр           config/knowledge/safety_rules.md  +  fb-api/
 
 .claude/skills/ads-agent/   порядок этапов, реплики, экран прогона
