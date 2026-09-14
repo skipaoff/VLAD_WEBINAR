@@ -18,3 +18,10 @@ leads.csv
 state/*.json
 state/*.jsonl
 state/log.txt
+
+# результаты прогона агента рекламы — у каждого свои
+modules/05-ads/build/*
+!modules/05-ads/build/.gitkeep
+modules/05-ads/cache/*
+!modules/05-ads/cache/.gitkeep
+modules/05-ads/history/*.md

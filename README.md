@@ -10,7 +10,7 @@
 | 02 | Собрать сайт по шагам | [02-website](modules/02-website/) | готов |
 | 03 | Прикрепить голосового ассистента | [03-voice-assistant](modules/03-voice-assistant/) | готов |
 | 04 | Сделать креативы | [04-creatives](modules/04-creatives/) | готов |
-| 05 | Запустить рекламу | [05-ads](modules/05-ads/) | готов |
+| 05 | Запустить рекламу с показом каждого этапа | [05-ads](modules/05-ads/) | готов |
 | 06 | Подключить AI-продавца | [06-sales-bot](modules/06-sales-bot/) | готов |
 | 07 | Написать лидам | [07-concierge](modules/07-concierge/) | готов |
 | 08 | Платформа поиска клиентов | [app.worknothunt.xyz](https://app.worknothunt.xyz) | по желанию |

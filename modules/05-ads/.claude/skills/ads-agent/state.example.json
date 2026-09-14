@@ -1,0 +1,76 @@
+{
+  "title": "Запуск рекламы",
+  "clinic": "",
+  "source": "",
+  "elapsed": 0,
+  "team": [
+    {
+      "name": "Техник",
+      "skill": "account-onboarding · fb-api",
+      "status": "wait",
+      "img": "assets/lica/razrabotchik.png"
+    },
+    {
+      "name": "Аналитик креатива",
+      "skill": "creative-analyzer",
+      "status": "wait",
+      "img": "assets/lica/analitik.png"
+    },
+    {
+      "name": "Таргетолог",
+      "skill": "targeting-expert",
+      "status": "wait",
+      "img": "assets/lica/strateg.png"
+    },
+    {
+      "name": "Редактор",
+      "skill": "creative-copywriter",
+      "status": "wait",
+      "img": "assets/lica/kopirayter.png"
+    },
+    {
+      "name": "Медиабайер",
+      "skill": "campaign-manager · naming-rules",
+      "status": "wait",
+      "img": "assets/lica/marketolog.png"
+    },
+    {
+      "name": "Контролёр",
+      "skill": "safety_rules · fb-api",
+      "status": "wait",
+      "img": "assets/lica/konversia.png"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Подключаюсь к кабинету",
+      "by": "Техник",
+      "status": "wait"
+    },
+    {
+      "title": "Разбираю креатив",
+      "by": "Аналитик креатива",
+      "status": "wait"
+    },
+    {
+      "title": "Подбираю аудиторию",
+      "by": "Таргетолог",
+      "status": "wait"
+    },
+    {
+      "title": "Пишу объявления",
+      "by": "Редактор",
+      "status": "wait"
+    },
+    {
+      "title": "Собираю кампанию",
+      "by": "Медиабайер",
+      "status": "wait"
+    },
+    {
+      "title": "Проверяю и запускаю",
+      "by": "Контролёр",
+      "status": "wait"
+    }
+  ]
+}
