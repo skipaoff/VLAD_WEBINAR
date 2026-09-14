@@ -11,19 +11,19 @@
       "img": "assets/lica/razrabotchik.png"
     },
     {
-      "name": "Оценщик видео",
+      "name": "Аналитик креатива",
       "skill": "creative-analyzer",
       "status": "wait",
       "img": "assets/lica/analitik.png"
     },
     {
-      "name": "Искатель зрителей",
+      "name": "Таргетолог",
       "skill": "targeting-expert",
       "status": "wait",
       "img": "assets/lica/strateg.png"
     },
     {
-      "name": "Автор текста",
+      "name": "Редактор",
       "skill": "creative-copywriter",
       "status": "wait",
       "img": "assets/lica/kopirayter.png"
@@ -49,17 +49,17 @@
     },
     {
       "title": "Смотрю видео",
-      "by": "Оценщик видео",
+      "by": "Аналитик креатива",
       "status": "wait"
     },
     {
       "title": "Ищу, кому показать",
-      "by": "Искатель зрителей",
+      "by": "Таргетолог",
       "status": "wait"
     },
     {
       "title": "Пишу текст рекламы",
-      "by": "Автор текста",
+      "by": "Редактор",
       "status": "wait"
     },
     {
