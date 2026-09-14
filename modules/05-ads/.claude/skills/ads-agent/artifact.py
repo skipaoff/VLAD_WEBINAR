@@ -216,17 +216,15 @@ h1,h2,h3{font-family:Unbounded,Manrope,system-ui,sans-serif;margin:0;letter-spac
 .live[data-done="1"] i{background:var(--blue);animation:none}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(47,134,255,0)}100%{box-shadow:0 0 0 0 rgba(47,134,255,0)}}
 
-.stick{position:sticky;top:0;z-index:30;margin-top:16px;padding:10px 0 16px;
+.stick{position:relative;z-index:1;margin-top:16px;padding:10px 0 16px;
        background:var(--void)}
-.stick::after{content:"";position:absolute;left:-20px;right:-20px;top:100%;height:22px;
-              pointer-events:none;z-index:31;
-              background:linear-gradient(180deg,var(--void) 35%,transparent)}
-.office{margin-top:0;border:1px solid var(--line);
+.stick::after{display:none}
+.office{margin-top:0;width:fit-content;max-width:100%;border:1px solid var(--line);
         border-radius:18px;background:var(--panel);padding:11px 13px 12px;
         box-shadow:0 18px 40px -22px rgba(0,0,0,.95)}
 .ohead{display:flex;justify-content:space-between;gap:12px;margin-bottom:9px;align-items:center}
-.office .stage{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#171a2c;line-height:0}
-.office canvas{width:100%;height:auto;display:block;image-rendering:pixelated}
+.office .stage{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#171a2c;line-height:0;text-align:center}
+.office canvas{width:auto;max-width:100%;height:170px;display:block;image-rendering:pixelated}
 .team{margin-top:8px;background:var(--void);position:relative;z-index:2}
 .teamhead{display:none}
 .mates{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
@@ -475,7 +473,7 @@ JS = """
   var now = document.getElementById('nowstep');
   if(now){
     var stick = document.querySelector('.stick');
-    var pad = (stick ? stick.getBoundingClientRect().height : 0) + 18;
+    var pad = 18;
     var y = now.getBoundingClientRect().top + window.pageYOffset - pad;
     if(y > 40) window.scrollTo({top: y, behavior: 'smooth'});
   }
