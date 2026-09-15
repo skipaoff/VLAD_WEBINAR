@@ -1,0 +1,19 @@
+{
+  "pal_name": "Universal Business Consultant RU",
+  "pipeline_mode": "full",
+  "face_id": "",
+  "languages": ["ru"],
+  "disclosure_type": "always",
+  "verbal_disclosure": "Обратите внимание: я AI-консультант, а не человек.",
+  "visual_disclosure": "Вы общаетесь с AI-консультантом.",
+  "skills": ["magic_canvas"],
+  "deployment": {
+    "channel": "widget",
+    "name": "Universal Agent Demo Widget",
+    "status": "active",
+    "password": null,
+    "customization": {},
+    "limits": {}
+  }
+}
+

@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "objective_name": "understand_request",
+      "objective_prompt": "Пойми, зачем пользователь начал разговор, какую задачу он хочет решить и какой тип бизнеса или услуги обсуждается. Не превращай это в анкету: обычно достаточно одного или двух естественных вопросов.",
+      "confirmation_mode": "auto",
+      "output_variables": ["intent", "business_type", "user_goal"],
+      "modality": "verbal",
+      "next_required_objective": "give_useful_answer"
+    },
+    {
+      "objective_name": "give_useful_answer",
+      "objective_prompt": "Дай пользователю конкретный и краткий ответ на его вопрос, используя только подтвержденные знания бизнеса. Если данных недостаточно, честно обозначь это. Затем предложи один подходящий следующий шаг.",
+      "confirmation_mode": "auto",
+      "output_variables": ["recommended_scenario", "recommended_next_step"],
+      "modality": "verbal",
+      "next_required_objective": "check_follow_up"
+    },
+    {
+      "objective_name": "check_follow_up",
+      "objective_prompt": "Выясни, хочет ли пользователь продолжить: получить консультацию человека, записаться или оставить контакт. Не дави и не запрашивай контактные данные до явного согласия.",
+      "confirmation_mode": "auto",
+      "output_variables": ["lead_status", "follow_up_consent"],
+      "modality": "verbal",
+      "next_conditional_objectives": {
+        "collect_contact": "Пользователь явно согласился на дальнейшую связь и хочет оставить контакт"
+      }
+    },
+    {
+      "objective_name": "collect_contact",
+      "objective_prompt": "Собери имя и один удобный способ связи: телефон или email. Повтори данные для проверки либо используй интерактивный ввод. Не запрашивай лишнюю информацию.",
+      "confirmation_mode": "auto",
+      "output_variables": ["name", "phone", "email", "preferred_contact_method"],
+      "modality": "verbal"
+    }
+  ]
+}
+

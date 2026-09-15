@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.tavus/
+demo/runtime-config.js
+.DS_Store
+*.log
+
