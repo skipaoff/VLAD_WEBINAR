@@ -14,7 +14,7 @@ my.telegram.org → API development tools → создать приложени�
 ```bash
 cd modules/07-concierge
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp .env.example .env      # вписать два значения
+cp .env.example .env      # вписать два значения (или один раз в общий .env в корне)
 ```
 
 ## 3. Авторизация

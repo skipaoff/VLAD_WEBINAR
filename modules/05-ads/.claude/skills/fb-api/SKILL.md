@@ -11,8 +11,11 @@ MCP-сервера нет. Агент дёргает Graph API напрямую 
 ## Основа
 
 ```bash
-source .env
-BASE="https://graph.facebook.com/$META_API_VERSION"
+# ключи: .env агента главнее общего .env репозитория, тот главнее ~/.config/vlad-webinar/.env
+for f in "$HOME/.config/vlad-webinar/.env" ../../.env .env; do
+  [ -f "$f" ] && { set -a; . "$f"; set +a; }
+done
+BASE="https://graph.facebook.com/${META_API_VERSION:-v23.0}"
 ```
 
 ## Подпись appsecret_proof

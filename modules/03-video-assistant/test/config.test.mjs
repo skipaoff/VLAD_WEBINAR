@@ -2,16 +2,26 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { buildSystemPrompt, loadConfiguration, validateConfiguration } from "../src/config.mjs";
 
-test("demo configuration is complete", async () => {
+const isTemplate = async () => /\{\{[^}]+\}\}/u.test(JSON.stringify((await loadConfiguration()).business));
+const templateSkip = (await isTemplate()) && "модуль ещё не заполнен под бизнес";
+
+test("configuration is complete", { skip: templateSkip }, async () => {
   const config = await loadConfiguration();
   assert.deepEqual(validateConfiguration(config), []);
 });
 
-test("system prompt contains business facts and final safety rules", async () => {
+test("fresh template is recognised as unfilled", async () => {
+  const config = await loadConfiguration();
+  if (!templateSkip) return;
+  assert.ok(validateConfiguration(config).some((e) => e.includes("{{")),
+    "незаполненный шаблон не должен проходить проверку");
+});
+
+test("system prompt contains business facts and final safety rules", { skip: templateSkip }, async () => {
   const config = await loadConfiguration();
   const prompt = buildSystemPrompt(config);
-  assert.match(prompt, /Universal Agent Demo/u);
-  assert.match(prompt, /универсального видео-консультанта/u);
+  assert.ok(prompt.includes(config.business.brand_name), "в промпте нет названия бренда");
+  assert.ok(prompt.includes(config.business.business_type), "в промпте нет описания бизнеса");
   assert.match(prompt, /Не выдумывай факты/u);
   assert.ok(prompt.indexOf("01-identity.md") < prompt.indexOf("04-rules.md"));
 });
@@ -24,7 +34,7 @@ test("invalid objective transition is reported", async () => {
 });
 
 
-test("assistant has exactly one name in the prompt", async () => {
+test("assistant has exactly one name in the prompt", { skip: templateSkip }, async () => {
   const config = await loadConfiguration();
   const prompt = buildSystemPrompt(config);
   const names = [...prompt.matchAll(/Ты\s+—\s+([А-ЯЁA-Z][а-яёa-z]+)/gu)].map((m) => m[1]);

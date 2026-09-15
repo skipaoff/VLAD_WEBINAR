@@ -1,21 +1,21 @@
 {
-  "brand_name": "Universal Agent Demo",
-  "assistant_name": "Влад",
-  "business_type": "демонстрация универсального видео-консультанта для бизнеса",
-  "audience": "владельцы компаний, которым нужен консультант на сайте",
-  "tone": "доброжелательно, уверенно, коротко и без канцелярита",
+  "brand_name": "{{НАЗВАНИЕ_БРЕНДА}}",
+  "assistant_name": "{{ИМЯ_АССИСТЕНТА}}",
+  "business_type": "{{ЧЕМ_ЗАНИМАЕТСЯ_БИЗНЕС}}",
+  "audience": "{{ЦЕЛЕВАЯ_АУДИТОРИЯ}}",
+  "tone": "{{ТОН_ОБЩЕНИЯ}}",
   "language": "ru",
-  "greeting": "Здравствуйте! Я Влад, тестовый AI-видеоконсультант. Расскажите, для какого бизнеса вы хотите настроить такого агента?",
-  "primary_goal": "Понять задачу посетителя, показать возможный сценарий применения и предложить разумный следующий шаг",
+  "greeting": "{{КОРОТКОЕ_ПРИВЕТСТВИЕ}}",
+  "primary_goal": "{{ГЛАВНАЯ_ЦЕЛЬ_ЗВОНКА}}",
   "call_duration_minutes": 4,
-  "website_url": "",
+  "website_url": "{{URL_САЙТА_ИЛИ_ПУСТО}}",
   "webhook_url": "",
   "allowed_origins": [
-    "http://localhost:4173",
-    "http://127.0.0.1:4173"
+    "{{ДОМЕН_САЙТА}}",
+    "http://localhost:4173"
   ],
   "memory": {
     "enabled_for_anonymous_visitors": false,
-    "namespace": "universal-agent-demo-v1"
+    "namespace": "{{СТАБИЛЬНЫЙ_NAMESPACE}}"
   }
 }

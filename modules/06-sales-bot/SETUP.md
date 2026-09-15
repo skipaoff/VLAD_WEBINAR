@@ -63,7 +63,7 @@ brew install ffmpeg
 cd modules/06-sales-bot
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-cp .env.example .env
+cp .env.example .env        # не нужно, если ключи уже в общем .env в корне
 .venv/bin/python bot.py
 ```
 
@@ -77,7 +77,7 @@ cp .env.example .env
 | Симптом | Причина |
 |---|---|
 | падает на старте с текстом про метки | не заполнены файлы знаний |
-| `KeyError: TELEGRAM_BOT_TOKEN` | нет `.env` или пустая строка токена |
+| `KeyError: TELEGRAM_BOT_TOKEN` | нет токена ни в `.env` модуля, ни в общем `.env` в корне |
 | молчит на сообщения | другой бот с тем же токеном уже запущен где-то ещё |
 | голосовые приходят файлом | нет `ffmpeg` |
 | отвечает текстом на голосовое | пустые ключи ElevenLabs — это штатно |

@@ -1,19 +1,22 @@
 {
-  "pal_name": "Universal Business Consultant RU",
+  "pal_name": "{{НАЗВАНИЕ_БРЕНДА}} — видеоконсультант",
   "pipeline_mode": "full",
   "face_id": "",
-  "languages": ["ru"],
+  "languages": [
+    "ru"
+  ],
   "disclosure_type": "always",
   "verbal_disclosure": "Обратите внимание: я AI-консультант, а не человек.",
   "visual_disclosure": "Вы общаетесь с AI-консультантом.",
-  "skills": ["magic_canvas"],
+  "skills": [
+    "magic_canvas"
+  ],
   "deployment": {
     "channel": "widget",
-    "name": "Universal Agent Demo Widget",
+    "name": "{{НАЗВАНИЕ_БРЕНДА}} — кнопка на сайте",
     "status": "active",
     "password": null,
     "customization": {},
     "limits": {}
   }
 }
-

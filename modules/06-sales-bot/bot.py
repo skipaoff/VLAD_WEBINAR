@@ -25,7 +25,11 @@ import requests
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent
-load_dotenv(ROOT / ".env")
+# Ключи ищутся по порядку: .env модуля → общий .env репозитория → ~/.config/vlad-webinar/.env.
+# load_dotenv не перетирает уже заданное, поэтому ближний файл главнее.
+for _env in (ROOT / ".env", ROOT.parent.parent / ".env", Path.home() / ".config" / "vlad-webinar" / ".env"):
+    if _env.exists():
+        load_dotenv(_env)
 
 BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TG = f"https://api.telegram.org/bot{BOT_TOKEN}"

@@ -38,7 +38,11 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parent
-load_dotenv(ROOT / ".env")
+# Ключи ищутся по порядку: .env модуля → общий .env репозитория → ~/.config/vlad-webinar/.env.
+# load_dotenv не перетирает уже заданное, поэтому ближний файл главнее.
+for _env in (ROOT / ".env", ROOT.parent.parent / ".env", Path.home() / ".config" / "vlad-webinar" / ".env"):
+    if _env.exists():
+        load_dotenv(_env)
 
 CONFIG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
 LIMITS = CONFIG["limits"]

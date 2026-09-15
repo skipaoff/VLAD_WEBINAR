@@ -70,7 +70,7 @@ state/                 история переписки, по файлу на �
 ```bash
 cd modules/06-sales-bot
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp .env.example .env        # вписать токен бота и ключ Anthropic
+cp .env.example .env        # вписать токен бота и ключ Anthropic (или один раз в общий .env в корне)
 .venv/bin/python bot.py
 ```
 
