@@ -1,6 +1,6 @@
 import { mkdir, writeFile, access } from "node:fs/promises";
 import path from "node:path";
-import { buildSystemPrompt, paths, validateConfiguration } from "./config.mjs";
+import { buildSystemPrompt, languagePack, palLanguages, paths, validateConfiguration } from "./config.mjs";
 import { faceIdOf, faceNameOf, selectFace } from "./tavus-client.mjs";
 
 async function exists(filePath) {
@@ -17,6 +17,22 @@ async function persistState(filePath, state) {
   await writeFile(filePath, `${JSON.stringify(state, null, 2)}\n`, { mode: 0o600 });
 }
 
+// Надписи в самой кнопке Tavus ставит по-английски. Переводим их на язык бизнеса
+// отдельным PATCH: при создании Deployment сервис принимает только целиком собранный
+// customization, а так правятся ровно те поля, которые видит посетитель.
+export function localizedDeploymentText(pack) {
+  if (!pack) return [];
+  const fields = [
+    ["/customization/widget/text/title", pack.widget?.title],
+    ["/customization/widget/text/btn_title", pack.widget?.btn_title],
+    ...Object.entries(pack.haircheck ?? {}).map(([key, value]) => [`/customization/haircheck/${key}`, value]),
+    ...Object.entries(pack.after_call ?? {}).map(([key, value]) => [`/customization/after_call/${key}`, value])
+  ];
+  return fields
+    .filter(([, value]) => typeof value === "string" && value.length > 0)
+    .map(([path, value]) => ({ op: "replace", path, value }));
+}
+
 function withCallback(items, webhookUrl) {
   if (!webhookUrl) return items;
   return items.map((item) => ({ ...item, callback_url: webhookUrl }));
@@ -29,7 +45,8 @@ export async function provision(client, config, { onProgress = () => {} } = {}) 
     throw new Error("Профиль уже создан: найден .tavus/state.json. Не создаю дубликаты.");
   }
 
-  const created = { guardrail_ids: [] };
+  const pack = languagePack(config);
+  const created = { guardrail_ids: [], languages: palLanguages(config) };
   try {
     onProgress("Выбираю доступное stock-лицо");
     const faces = await client.get("/faces?limit=100&verbose=true");
@@ -59,12 +76,12 @@ export async function provision(client, config, { onProgress = () => {} } = {}) 
       pipeline_mode: config.tavus.pipeline_mode,
       system_prompt: buildSystemPrompt(config),
       default_face_id: created.face_id,
-      languages: config.tavus.languages,
+      languages: created.languages,
       objectives_id: created.objectives_id,
       guardrail_ids: created.guardrail_ids,
       disclosure_type: config.tavus.disclosure_type,
-      verbal_disclosure: config.tavus.verbal_disclosure,
-      visual_disclosure: config.tavus.visual_disclosure
+      verbal_disclosure: pack.verbal_disclosure,
+      visual_disclosure: pack.visual_disclosure
     });
     created.pal_id = palResponse.pal_id;
 
@@ -85,6 +102,12 @@ export async function provision(client, config, { onProgress = () => {} } = {}) 
       allowed_origins: config.business.allowed_origins
     });
     created.deployment_id = deploymentResponse.deployment_id;
+
+    const textOps = localizedDeploymentText(pack);
+    if (textOps.length) {
+      onProgress("Перевожу надписи кнопки на язык бизнеса");
+      await client.patch(`/deployments/${created.deployment_id}`, textOps);
+    }
 
     if (deployment.status && deploymentResponse.status !== deployment.status) {
       onProgress(`Перевожу Deployment в статус ${deployment.status}`);

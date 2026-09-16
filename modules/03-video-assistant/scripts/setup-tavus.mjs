@@ -33,6 +33,7 @@ try {
   console.log(`\nPAL: ${state.pal_id}`);
   console.log(`Deployment: ${state.deployment_id}`);
   console.log(`Face: ${state.face_name} (${state.face_id})`);
+  console.log(`Язык: ${state.languages.join(", ")}`);
   console.log("\nЗапустите npm run demo и откройте http://localhost:4173");
 } catch (error) {
   console.error(`\nСоздание остановлено: ${error.message}`);

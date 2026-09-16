@@ -2,12 +2,8 @@
   "pal_name": "{{НАЗВАНИЕ_БРЕНДА}} — видеоконсультант",
   "pipeline_mode": "full",
   "face_id": "",
-  "languages": [
-    "ru"
-  ],
+  "extra_languages": [],
   "disclosure_type": "always",
-  "verbal_disclosure": "Обратите внимание: я AI-консультант, а не человек.",
-  "visual_disclosure": "Вы общаетесь с AI-консультантом.",
   "skills": [
     "magic_canvas"
   ],

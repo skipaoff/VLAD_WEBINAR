@@ -1,0 +1,74 @@
+{
+  "ru": {
+    "language_name": "русском",
+    "native_instruction": "Говори только по-русски.",
+    "verbal_disclosure": "Обратите внимание: я AI-консультант, а не человек.",
+    "visual_disclosure": "Вы общаетесь с AI-консультантом.",
+    "widget": {
+      "title": "Поговорить с консультантом?",
+      "btn_title": "Начать разговор"
+    },
+    "haircheck": {
+      "permission_request_title": "Нужны камера и микрофон",
+      "permission_request_description": "Это живой видеозвонок — собеседник вас видит и слышит.",
+      "permission_granted_title": "Всё готово",
+      "permission_granted_description": "Камера и микрофон работают. Можно заходить.",
+      "permission_denied_title": "Доступ не дали",
+      "permission_denied_description": "Разрешите камеру и микрофон в настройках браузера и обновите страницу.",
+      "join_button": "Войти в разговор",
+      "cancel_btn": "Отмена"
+    },
+    "after_call": {
+      "title": "Спасибо за разговор",
+      "description": "Остались вопросы — позвоните ещё раз, кнопка на месте."
+    }
+  },
+  "uk": {
+    "language_name": "украинском",
+    "native_instruction": "Говори виключно українською мовою.",
+    "verbal_disclosure": "Одразу скажу: я AI-консультант, а не жива людина.",
+    "visual_disclosure": "Ви спілкуєтеся з AI-консультантом.",
+    "widget": {
+      "title": "Поговорити з консультантом?",
+      "btn_title": "Почати розмову"
+    },
+    "haircheck": {
+      "permission_request_title": "Потрібні камера і мікрофон",
+      "permission_request_description": "Це живий відеодзвінок — співрозмовник вас бачить і чує.",
+      "permission_granted_title": "Усе готово",
+      "permission_granted_description": "Камера і мікрофон працюють. Можна заходити.",
+      "permission_denied_title": "Доступу немає",
+      "permission_denied_description": "Дозвольте камеру і мікрофон у налаштуваннях браузера та оновіть сторінку.",
+      "join_button": "Увійти в розмову",
+      "cancel_btn": "Скасувати"
+    },
+    "after_call": {
+      "title": "Дякую за розмову",
+      "description": "Залишились питання — зателефонуйте ще раз, кнопка на місці."
+    }
+  },
+  "en": {
+    "language_name": "английском",
+    "native_instruction": "Speak English only.",
+    "verbal_disclosure": "Just so you know: I am an AI consultant, not a human.",
+    "visual_disclosure": "You are talking to an AI consultant.",
+    "widget": {
+      "title": "Talk to a consultant?",
+      "btn_title": "Start conversation"
+    },
+    "haircheck": {
+      "permission_request_title": "Camera and microphone needed",
+      "permission_request_description": "This is a live video call — the consultant sees and hears you.",
+      "permission_granted_title": "All set",
+      "permission_granted_description": "Camera and microphone work. You can join.",
+      "permission_denied_title": "Access denied",
+      "permission_denied_description": "Allow camera and microphone in your browser settings and reload the page.",
+      "join_button": "Join the call",
+      "cancel_btn": "Cancel"
+    },
+    "after_call": {
+      "title": "Thanks for the call",
+      "description": "Still have questions? Call again — the button is right there."
+    }
+  }
+}

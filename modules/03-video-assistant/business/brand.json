@@ -4,7 +4,7 @@
   "business_type": "{{ЧЕМ_ЗАНИМАЕТСЯ_БИЗНЕС}}",
   "audience": "{{ЦЕЛЕВАЯ_АУДИТОРИЯ}}",
   "tone": "{{ТОН_ОБЩЕНИЯ}}",
-  "language": "ru",
+  "language": "{{КОД_ЯЗЫКА: ru, uk, en или другой из config/languages.json}}",
   "greeting": "{{КОРОТКОЕ_ПРИВЕТСТВИЕ}}",
   "primary_goal": "{{ГЛАВНАЯ_ЦЕЛЬ_ЗВОНКА}}",
   "call_duration_minutes": 4,
