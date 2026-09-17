@@ -39,6 +39,20 @@
 модуль. Агент забирает модуль, задаёт три вопроса про бизнес, заполняет шаблоны и ставит
 модуль на сайт. Ключи ведущий не диктует и не показывает: они уже лежат в общем `.env` на машине.
 
+## Экраны прогона
+
+У каждого модуля есть экран прогона — страница, на которой команда агентов по шагам делает работу, а в конце появляется готовый результат. Страница идёт сама, ничего нажимать не нужно.
+
+| Модуль | Экран |
+|---|---|
+| Сайт клиники | [modules/02-website/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/02-website/progon/) |
+| Видеоконсультант | [modules/03-video-assistant/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video-assistant/progon/) |
+| Рекламный ролик | [modules/04-creatives/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/04-creatives/progon/) |
+| Реклама | [modules/05-ads/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/05-ads/progon/) |
+| AI-продавец | [modules/06-sales-bot/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/06-sales-bot/progon/) |
+
+Для репетиции добавь к ссылке `?t=300` — экран откроется на пятой минуте.
+
 ## Правило репозитория
 
 Секретов здесь нет и не будет. Каждый модуль хранит только `.env.example` с пустыми полями.
