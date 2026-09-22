@@ -199,6 +199,8 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
   background:var(--accent);border-radius:8px;padding:7px 13px;white-space:nowrap;transition:.2s}
 .write:hover{transform:translateY(-1px)}
 .write:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.lead.own{border-color:rgba(61,139,255,.45);background:rgba(61,139,255,.06)}
+.lead .tg.own{color:var(--blue)}
 .lead.dupe{opacity:.45}
 .lead.dupe .write{background:var(--line);color:var(--mid);pointer-events:none}
 
@@ -242,7 +244,7 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
       <div id="steps"></div>
       <div class="fin" id="fin" hidden>
         <h2>Готово</h2>
-        <p>Список готов: 15 клиник, у каждой оценка, адрес и номер, который нашёлся в Телеграме. Жми «Написать» на карточке — откроется диалог.</p>
+        <p>Список готов: 15 клиник из поиска и Comfort, с которой уже работаем. У каждой — адрес, номер и кнопка «Написать».</p>
         <a class="go" id="resGo" href="#" target="_blank" rel="noopener">Скопировать все номера</a>
       </div>
     </section>
@@ -251,7 +253,7 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
       <div class="feed">
         <div class="fhead">
           <span class="lab">кого нашли</span>
-          <span class="fcount"><b id="fNum">0</b> из 15</span>
+          <span class="fcount"><b id="fNum">0</b> из 16</span>
         </div>
         <div class="flist" id="flist"></div>
       </div>
@@ -287,7 +289,7 @@ const STEPS = [
   {t:"Свожу дубли по номеру", sub:"у клиники бывает несколько точек", dur:34, scene:"dupes", who:0,
    log:[[.4,"несколько адресов на один телефон — одна строка"],[.85,"иначе ушло бы второе письмо на тот же номер",1]]},
   {t:"Сортирую по отзывам", sub:"сверху те, кому больше доверяют", dur:30, scene:"sort", who:0,
-   log:[[.4,"сверху те, у кого больше отзывов"],[.85,"итог: 15 клиник с Телеграмом",1]]}
+   log:[[.4,"сверху те, у кого больше отзывов"],[.85,"15 клиник из поиска плюс Comfort, с которой работаем",1]]}
 ];
 
 
@@ -306,7 +308,8 @@ const CLINICS = [
   ["City Smile","Стоматолог","4.8",380,"вулиця Василя Липківського, 18","+380 97 227 1809","380972271809"],
   ["Федомеда","Стоматологическая клиника","4.8",316,"вулиця Лісківська, 6","+380 68 466 5424","380684665424"],
   ["iStomatolog","Стоматологическая клиника","4.9",302,"вулиця Краківська, 11","+380 67 502 8999","380675028999"],
-  ["ЦИС","Стоматологическая клиника","4.7",300,"Дніпровська набережна, 25","+380 95 441 2277","380954412277"]
+  ["ЦИС","Стоматологическая клиника","4.7",300,"Дніпровська набережна, 25","+380 95 441 2277","380954412277"],
+  ["Стоматологія Comfort","Стоматологическая клиника","",0,"пр. Червоної Калини, 67 — Троєщина","+380 67 604 17 13","380676041713","site"]
 ];
 
 const chips = arr => '<div class="facts">'+arr.map(c=>'<span class="chip it">'+c+'</span>').join('')+'</div>';
@@ -316,7 +319,7 @@ const BUILD = {
   collect: () => chips(["места с телефоном","оценка и отзывы","адрес","сайт"]),
   check:   () => chips(["145 проверок номеров в базе","все проверки — Телеграм","WhatsApp не проверялся","остаются только найденные"]),
   dupes:   () => chips(["одна клиника — несколько точек","один номер — одна строка","второго письма не будет"]),
-  sort:    () => chips(["сверху больше отзывов","от 969 до 300 отзывов","итог: 15 клиник"])
+  sort:    () => chips(["сверху больше отзывов","от 969 до 300 отзывов","15 из поиска","плюс Comfort, с которой работаем"])
 };
 
 const LAB = {brief:"что ищем", collect:"что беру с карточки", check:"проверка номеров",
@@ -327,14 +330,21 @@ const flist = () => el("flist");
 
 function card(i){
   const c = CLINICS[i];
-  return '<article class="lead" id="ld'+i+'">'+
-    '<div class="rank">'+String(i + 1).padStart(2, "0")+'</div>'+
-    '<div><b>'+c[0]+'</b>'+
-      '<div class="meta">'+c[1]+' · <span class="rate">★ '+c[2]+'</span> · '+c[3]+' отзывов</div>'+
-      '<div class="addr">'+c[4]+'</div></div>'+
-    '<div class="act"><span class="tg">✓ Телеграм</span>'+
-      '<a class="write" href="https://t.me/+'+c[6]+'" target="_blank" rel="noopener">Написать</a>'+
-      '<span class="ph">'+c[5]+'</span></div></article>';
+  const known = c[7] !== "site";
+  const meta = known
+    ? c[1] + ' · <span class="rate">★ ' + c[2] + '</span> · ' + c[3] + ' отзывов'
+    : c[1] + ' · с ней уже работаем';
+  const mark = known
+    ? '<span class="tg">✓ Телеграм</span>'
+    : '<span class="tg own">номер с сайта</span>';
+  return '<article class="lead' + (known ? '' : ' own') + '" id="ld' + i + '">' +
+    '<div class="rank">' + String(i + 1).padStart(2, "0") + '</div>' +
+    '<div><b>' + c[0] + '</b>' +
+      '<div class="meta">' + meta + '</div>' +
+      '<div class="addr">' + c[4] + '</div></div>' +
+    '<div class="act">' + mark +
+      '<a class="write" href="https://t.me/+' + c[6] + '" target="_blank" rel="noopener">Написать</a>' +
+      '<span class="ph">' + c[5] + '</span></div></article>';
 }
 
 function addUpTo(n){
