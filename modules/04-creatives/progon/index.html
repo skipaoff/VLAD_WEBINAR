@@ -312,12 +312,11 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
     </section>
   </div>
 
-  <section class="card crew">
+  <section class="card crew" id="crew">
     <span class="lab">кто сейчас работает</span>
     <div class="team" id="team"></div>
   </section>
 
-  <div class="foot">экран прогона · обновляется сам, ничего нажимать не нужно</div>
 </div>
 
 <script>
@@ -473,8 +472,9 @@ STEPS.forEach((s,i)=>{
   stepsBox.appendChild(d);
 });
 
-/* команда */
+/* команда: если её нет, полосу прячем */
 const teamBox = el("team");
+if(!CREW.length) el("crew").hidden = true;
 CREW.forEach((m,i)=>{
   const d = document.createElement("div");
   d.className = "mate"; d.id = "mt"+i; d.setAttribute("data-say", m[2]);
@@ -537,7 +537,7 @@ function frame(now){
   });
 
   const activeMate = finished ? -1 : STEPS[cur].who;
-  CREW.forEach((m,i)=>{
+  if(CREW.length) CREW.forEach((m,i)=>{
     const done = finished || i < STEPS[cur].who;
     const cls = i === activeMate ? "mate now" : done ? "mate was" : "mate";
     const node = el("mt"+i);
@@ -546,7 +546,7 @@ function frame(now){
 
   if(builtStep !== cur) buildScene(cur);
   revealScene(finished ? 1 : frac);
-  if(window.STAGE && STAGE.tick) STAGE.tick(STEPS[cur].scene, finished ? 1 : frac, finished);
+  if(window.STAGE && STAGE.tick) STAGE.tick(STEPS[cur].scene, finished ? 1 : frac, finished, elapsed / TOTAL);
 
   if(finished && el("fin").hidden){
     el("fin").hidden = false;
