@@ -45,6 +45,7 @@
 
 | Модуль | Экран |
 |---|---|
+| Поиск клиентов | [modules/01-poisk-klientov/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/01-poisk-klientov/progon/) |
 | Сайт клиники | [modules/02-website/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/02-website/progon/) |
 | Видеоконсультант | [modules/03-video-assistant/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video-assistant/progon/) |
 | Рекламный ролик | [modules/04-creatives/progon](https://skipaoff.github.io/VLAD_WEBINAR/modules/04-creatives/progon/) |
