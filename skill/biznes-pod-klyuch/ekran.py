@@ -72,6 +72,31 @@ def grid(arr):
     return '<div class="grid">' + "".join(out) + "</div>"
 
 
+def rabota(vid):
+    """Видно, что человек делает прямо сейчас: маленькая живая картинка работы."""
+    n = lambda k: "<i></i>" * k
+    m = {
+        "skan":    '<div class="br"><span class="dots">%s</span></div><div class="ln">%s</div>'
+                   '<span class="scan"></span>' % (n(3), n(7)),
+        "spisok":  '<div class="rows">%s</div>' % ("<div><b></b><u></u></div>" * 4),
+        "pechat":  '<div class="type">%s<span class="car"></span></div>' % n(4),
+        "bloki":   '<div class="lay">%s</div>' % n(5),
+        "ekrany":  '<div class="dev desk"><span></span></div><div class="dev mob"><span></span></div>',
+        "plitki":  '<div class="tiles">%s</div>' % n(5),
+        "karta":   '<div class="map"><span class="ring"></span><span class="ring"></span>'
+                   '<span class="ring"></span><span class="pin"></span></div>',
+        "polosy":  '<div class="bars">%s</div>' % n(4),
+        "dialog":  '<div class="talk"><span class="b l"></span><span class="b r"></span>'
+                   '<span class="b l"></span><span class="b r"></span></div>',
+        "kadry":   '<div class="film">%s</div>' % n(7),
+        "golos":   '<div class="eq">%s</div>' % n(15),
+        "montazh": '<div class="tl">%s<span class="head"></span></div>' % n(5),
+    }
+    if vid not in m:
+        return ""
+    return '<div class="rabota" data-vid="%s">%s</div>' % (esc(vid), m[vid])
+
+
 def chips(arr):
     if not arr:
         return ""
@@ -113,6 +138,8 @@ def card_now(s, n, total):
             body.append('<p class="say">' + esc(s["say"]) + "</p>")
         body.append(chips(s.get("chips")))
         body.append(items(s.get("items")))
+    if live:
+        body.append(rabota(s.get("vid")))
     body.append(log(s.get("log"), live))
     if live:
         body.append('<div class="work"><i></i><span>работает</span></div>')

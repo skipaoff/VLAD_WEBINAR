@@ -54,9 +54,9 @@ h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clam
 .crew{margin-top:16px;background:var(--deep);border:1px solid var(--line);border-radius:16px;padding:13px 14px}
 .crewtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
 .mates{display:flex;gap:9px;overflow-x:auto;overflow-y:hidden;padding:4px 2px 8px;scrollbar-width:thin}
-.mate{flex:0 0 116px;background:var(--fill);border:1px solid var(--line);border-radius:12px;
-  padding:10px 8px 9px;text-align:center;cursor:pointer;color:var(--ink);font:inherit;
-  display:flex;flex-direction:column;align-items:center;gap:3px;transition:.25s}
+.mate{flex:0 0 124px;background:var(--fill);border:1px solid var(--line);border-radius:12px;
+  padding:11px 9px 10px;text-align:center;cursor:pointer;color:var(--ink);font:inherit;
+  display:flex;flex-direction:column;align-items:center;gap:4px;transition:.25s}
 .mate:hover{border-color:var(--hot);background:rgba(255,255,255,.07)}
 .mate:focus{outline:none}
 .mate:focus-visible{border-color:var(--blue);box-shadow:0 0 0 2px rgba(61,139,255,.45)}
@@ -64,10 +64,11 @@ h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clam
   box-shadow:0 0 0 2px rgba(49,233,129,.55)}
 .mate[aria-pressed="true"] .st{color:var(--accent)}
 .mate[aria-pressed="true"] .st::after{content:" · открыт"}
-.face{width:52px;height:52px;border-radius:10px;image-rendering:pixelated;background:rgba(255,255,255,.05);
-  filter:grayscale(1) opacity(.45);transition:.4s}
-.mate[data-s="run"] .face{filter:none;box-shadow:0 0 0 2px rgba(61,139,255,.6)}
-.mate[data-s="done"] .face{filter:none}
+.face{width:64px;height:96px;object-fit:contain;image-rendering:pixelated;border-radius:10px;
+  background:rgba(255,255,255,.05);padding:4px 0;filter:grayscale(1) opacity(.45);transition:.4s}
+.mate[data-s="run"] .face{filter:none;background:rgba(61,139,255,.12);
+  box-shadow:inset 0 0 0 1px rgba(61,139,255,.5)}
+.mate[data-s="done"] .face{filter:none;background:rgba(49,233,129,.07)}
 .mate[data-s="run"]{border-color:rgba(61,139,255,.5);background:rgba(61,139,255,.08)}
 .mate[data-s="done"]{border-color:rgba(49,233,129,.25)}
 .mate b{font-size:12px;font-weight:700;line-height:1.2}
@@ -116,6 +117,147 @@ h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clam
 .tile figcaption{font-size:11px;color:var(--mid);padding:7px 9px 8px;line-height:1.3}
 .shot.hole{display:grid;place-items:center;min-height:190px;border-style:dashed;
   font-family:var(--mono);font-size:11.5px;color:var(--dim);text-align:center;padding:16px}
+
+/* видно, что делают прямо сейчас */
+.rabota{position:relative;overflow:hidden;background:#080C12;border:1px solid var(--line);
+  border-radius:12px;height:132px;margin:2px 0 12px;padding:12px 14px}
+.rabota i,.rabota b,.rabota u,.rabota span{display:block}
+
+/* смотрю сайт: страница и бегущая полоса разбора */
+.rabota[data-vid="skan"] .br{display:flex;gap:5px;margin-bottom:9px}
+.rabota[data-vid="skan"] .dots{display:flex;gap:5px}
+.rabota[data-vid="skan"] .dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.14)}
+.rabota[data-vid="skan"] .ln i{height:7px;border-radius:3px;background:rgba(255,255,255,.07);
+  margin-bottom:6px;animation:lit 2.4s ease-in-out infinite}
+.rabota[data-vid="skan"] .ln i:nth-child(1){width:62%}
+.rabota[data-vid="skan"] .ln i:nth-child(2){width:88%;animation-delay:.15s}
+.rabota[data-vid="skan"] .ln i:nth-child(3){width:74%;animation-delay:.3s}
+.rabota[data-vid="skan"] .ln i:nth-child(4){width:91%;animation-delay:.45s}
+.rabota[data-vid="skan"] .ln i:nth-child(5){width:55%;animation-delay:.6s}
+.rabota[data-vid="skan"] .ln i:nth-child(6){width:80%;animation-delay:.75s}
+.rabota[data-vid="skan"] .ln i:nth-child(7){width:44%;animation-delay:.9s}
+@keyframes lit{0%,100%{background:rgba(255,255,255,.07)}45%{background:rgba(61,139,255,.45)}}
+.rabota[data-vid="skan"] .scan{position:absolute;left:0;right:0;height:34px;
+  background:linear-gradient(180deg,transparent,rgba(61,139,255,.16),transparent);
+  border-top:1px solid rgba(61,139,255,.6);animation:sweep 2.4s linear infinite}
+@keyframes sweep{from{top:-34px}to{top:132px}}
+
+/* разбираю: строчки заполняются одна за другой */
+.rabota[data-vid="spisok"] .rows{display:flex;flex-direction:column;gap:11px;padding-top:6px}
+.rabota[data-vid="spisok"] .rows div{display:flex;align-items:center;gap:10px;opacity:.25;
+  animation:pop2 3.2s ease-in-out infinite}
+.rabota[data-vid="spisok"] .rows div:nth-child(2){animation-delay:.5s}
+.rabota[data-vid="spisok"] .rows div:nth-child(3){animation-delay:1s}
+.rabota[data-vid="spisok"] .rows div:nth-child(4){animation-delay:1.5s}
+.rabota[data-vid="spisok"] .rows b{width:16px;height:16px;border-radius:5px;background:rgba(49,233,129,.5);flex:none}
+.rabota[data-vid="spisok"] .rows u{height:7px;border-radius:3px;background:rgba(255,255,255,.12);flex:1}
+@keyframes pop2{0%,10%{opacity:.18;transform:translateX(-4px)}30%,100%{opacity:1;transform:none}}
+
+/* пишу: строчки набираются с курсором */
+.rabota[data-vid="pechat"] .type{position:relative;padding-top:8px}
+.rabota[data-vid="pechat"] .type i{height:8px;border-radius:3px;background:rgba(49,233,129,.35);
+  margin-bottom:11px;width:0;animation:tp 3.4s steps(28) infinite}
+.rabota[data-vid="pechat"] .type i:nth-child(1){animation-delay:0s}
+.rabota[data-vid="pechat"] .type i:nth-child(2){animation-delay:.85s}
+.rabota[data-vid="pechat"] .type i:nth-child(3){animation-delay:1.7s}
+.rabota[data-vid="pechat"] .type i:nth-child(4){animation-delay:2.55s}
+@keyframes tp{0%{width:0}25%{width:86%}90%{width:86%}100%{width:0}}
+.rabota[data-vid="pechat"] .car{position:absolute;left:0;bottom:14px;width:8px;height:12px;
+  background:var(--accent);animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+
+/* раскладываю: блоки встают на места */
+.rabota[data-vid="bloki"] .lay{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;height:100%}
+.rabota[data-vid="bloki"] .lay i{background:rgba(61,139,255,.16);border:1px solid rgba(61,139,255,.3);
+  border-radius:7px;opacity:0;animation:drop 3.2s ease-out infinite}
+.rabota[data-vid="bloki"] .lay i:nth-child(1){grid-column:1/4}
+.rabota[data-vid="bloki"] .lay i:nth-child(2){animation-delay:.4s}
+.rabota[data-vid="bloki"] .lay i:nth-child(3){animation-delay:.8s}
+.rabota[data-vid="bloki"] .lay i:nth-child(4){animation-delay:1.2s}
+.rabota[data-vid="bloki"] .lay i:nth-child(5){grid-column:1/4;animation-delay:1.6s}
+@keyframes drop{0%{opacity:0;transform:translateY(-8px)}18%,88%{opacity:1;transform:none}100%{opacity:0}}
+
+/* проверяю на экранах */
+.rabota[data-vid="ekrany"]{display:flex;gap:14px;align-items:center;justify-content:center}
+.rabota[data-vid="ekrany"] .dev{position:relative;border:1px solid var(--line-hot,rgba(255,255,255,.2));
+  border-radius:8px;overflow:hidden;background:rgba(255,255,255,.04)}
+.rabota[data-vid="ekrany"] .desk{width:170px;height:104px}
+.rabota[data-vid="ekrany"] .mob{width:54px;height:104px;border-radius:10px}
+.rabota[data-vid="ekrany"] .dev span{position:absolute;left:0;right:0;bottom:0;height:0;
+  background:linear-gradient(0deg,rgba(49,233,129,.35),rgba(49,233,129,.05));animation:fill 2.6s ease-in-out infinite}
+.rabota[data-vid="ekrany"] .mob span{animation-delay:.7s}
+@keyframes fill{0%{height:0}55%{height:100%}90%{height:100%}100%{height:0}}
+
+/* рисую картинки */
+.rabota[data-vid="plitki"] .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;height:100%}
+.rabota[data-vid="plitki"] .tiles i{border-radius:8px;background:rgba(255,255,255,.05);
+  border:1px solid var(--line);opacity:0;animation:shine 3.6s ease-out infinite}
+.rabota[data-vid="plitki"] .tiles i:nth-child(2){animation-delay:.45s}
+.rabota[data-vid="plitki"] .tiles i:nth-child(3){animation-delay:.9s}
+.rabota[data-vid="plitki"] .tiles i:nth-child(4){animation-delay:1.35s}
+.rabota[data-vid="plitki"] .tiles i:nth-child(5){animation-delay:1.8s}
+@keyframes shine{0%{opacity:0;transform:scale(.9)}14%{opacity:1;transform:none;
+  background:rgba(49,233,129,.25)}30%,88%{opacity:1;background:rgba(255,255,255,.07)}100%{opacity:0}}
+
+/* где показываем: точка и круги вокруг */
+.rabota[data-vid="karta"]{background:#080C12 repeating-linear-gradient(0deg,transparent 0 21px,rgba(255,255,255,.04) 21px 22px),
+  repeating-linear-gradient(90deg,transparent 0 21px,rgba(255,255,255,.04) 21px 22px)}
+.rabota[data-vid="karta"] .map{position:relative;height:100%}
+.rabota[data-vid="karta"] .pin{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5px 0 0 -5px;
+  border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(49,233,129,.8)}
+.rabota[data-vid="karta"] .ring{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;
+  border-radius:50%;border:1px solid rgba(49,233,129,.55);animation:ring 3s ease-out infinite}
+.rabota[data-vid="karta"] .ring:nth-child(2){animation-delay:1s}
+.rabota[data-vid="karta"] .ring:nth-child(3){animation-delay:2s}
+@keyframes ring{0%{transform:scale(1);opacity:.9}100%{transform:scale(9);opacity:0}}
+
+/* делю деньги */
+.rabota[data-vid="polosy"] .bars{display:flex;gap:14px;align-items:flex-end;height:100%;padding-bottom:4px}
+.rabota[data-vid="polosy"] .bars i{flex:1;border-radius:6px 6px 3px 3px;height:10%;
+  background:linear-gradient(180deg,var(--accent),rgba(61,139,255,.6));animation:grow 3s ease-in-out infinite}
+.rabota[data-vid="polosy"] .bars i:nth-child(2){animation-delay:.25s}
+.rabota[data-vid="polosy"] .bars i:nth-child(3){animation-delay:.5s}
+.rabota[data-vid="polosy"] .bars i:nth-child(4){animation-delay:.75s}
+@keyframes grow{0%{height:8%}45%{height:88%}75%{height:62%}100%{height:8%}}
+
+/* проверяю разговором */
+.rabota[data-vid="dialog"] .talk{display:flex;flex-direction:column;gap:8px;height:100%;justify-content:center}
+.rabota[data-vid="dialog"] .b{height:19px;border-radius:10px;opacity:0;animation:say 3.6s ease-out infinite}
+.rabota[data-vid="dialog"] .b.l{width:58%;align-self:flex-start;background:rgba(255,255,255,.08);
+  border:1px solid var(--line);border-bottom-left-radius:3px}
+.rabota[data-vid="dialog"] .b.r{width:46%;align-self:flex-end;background:rgba(49,233,129,.18);
+  border:1px solid rgba(49,233,129,.35);border-bottom-right-radius:3px}
+.rabota[data-vid="dialog"] .b:nth-child(2){animation-delay:.55s}
+.rabota[data-vid="dialog"] .b:nth-child(3){animation-delay:1.1s}
+.rabota[data-vid="dialog"] .b:nth-child(4){animation-delay:1.65s}
+@keyframes say{0%{opacity:0;transform:translateY(6px)}12%,88%{opacity:1;transform:none}100%{opacity:0}}
+
+/* кадры */
+.rabota[data-vid="kadry"] .film{display:flex;gap:8px;height:100%;align-items:center;animation:roll 4s linear infinite}
+.rabota[data-vid="kadry"] .film i{flex:0 0 62px;height:88px;border-radius:6px;border:1px solid var(--line);
+  background:rgba(255,255,255,.05)}
+.rabota[data-vid="kadry"] .film i:nth-child(odd){background:rgba(61,139,255,.12)}
+@keyframes roll{from{transform:translateX(0)}to{transform:translateX(-140px)}}
+
+/* озвучиваю */
+.rabota[data-vid="golos"] .eq{display:flex;gap:5px;align-items:center;justify-content:center;height:100%}
+.rabota[data-vid="golos"] .eq i{width:5px;border-radius:3px;height:12px;
+  background:linear-gradient(180deg,var(--accent),var(--blue));animation:eqq 1.1s ease-in-out infinite}
+@keyframes eqq{0%,100%{height:10px}50%{height:72px}}
+
+/* монтаж */
+.rabota[data-vid="montazh"] .tl{position:relative;display:flex;gap:6px;align-items:center;height:100%}
+.rabota[data-vid="montazh"] .tl i{height:46px;border-radius:6px;background:rgba(61,139,255,.18);
+  border:1px solid rgba(61,139,255,.32)}
+.rabota[data-vid="montazh"] .tl i:nth-child(1){flex:2}
+.rabota[data-vid="montazh"] .tl i:nth-child(2){flex:3}
+.rabota[data-vid="montazh"] .tl i:nth-child(3){flex:1.4}
+.rabota[data-vid="montazh"] .tl i:nth-child(4){flex:2.6}
+.rabota[data-vid="montazh"] .tl i:nth-child(5){flex:1.8}
+.rabota[data-vid="montazh"] .head{position:absolute;top:0;bottom:0;width:2px;background:var(--accent);
+  box-shadow:0 0 10px rgba(49,233,129,.9);animation:play 4s linear infinite}
+@keyframes play{from{left:0}to{left:100%}}
+@media(prefers-reduced-motion:reduce){.rabota *{animation:none!important}}
 .items{list-style:none;margin:0 0 11px;padding:0;display:flex;flex-direction:column;gap:6px}
 .items li{font-size:13.5px;color:var(--mid);display:flex;gap:9px}
 .items li::before{content:"✓";color:var(--accent);font-family:var(--mono);font-size:11px}
@@ -160,8 +302,8 @@ h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clam
 .mv{margin-top:16px;background:linear-gradient(180deg,var(--raise),var(--panel));
   border:1px solid rgba(49,233,129,.3);border-radius:16px;padding:15px 18px 18px;color:var(--ink)}
 .mv[hidden]{display:none}
-.shhead{display:flex;align-items:center;gap:13px;margin-bottom:6px}
-.face.big{width:56px;height:56px;filter:none}
+.shhead{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.face.big{width:64px;height:96px;filter:none;background:rgba(49,233,129,.07)}
 .shhead b{display:block;font-family:var(--disp);font-size:18px;font-weight:600;letter-spacing:-.02em}
 .shhead span{color:var(--mid);font-size:13px}
 .back{margin-left:auto;border:1px solid var(--line);background:var(--fill);color:var(--mid);cursor:pointer;
@@ -184,7 +326,8 @@ h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clam
 .itrow .it.wait b{color:var(--dim)}
 @media(max-width:620px){
   .nums{width:100%;margin-left:0}
-  .mate{flex:0 0 104px}
+  .mate{flex:0 0 112px}
+  .face{width:58px;height:87px}
 }
 </style>
 </head>
