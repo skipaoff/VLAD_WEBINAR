@@ -135,7 +135,7 @@ def mate_cards(team, steps):
 
 
 def mate_sheets(team, steps):
-    """Что открывается по клику на человека: его шаги с результатом."""
+    """Что показывается на той же полке, когда нажали на человека."""
     out = []
     for k, m in enumerate(team):
         mine = [(i + 1, s) for i, s in enumerate(steps) if s.get("who") == k]
@@ -143,7 +143,8 @@ def mate_sheets(team, steps):
         face = lico(m.get("img"))
         if face:
             body.append('<img class="face big" src="%s" alt="">' % face)
-        body.append('<div><b>%s</b><span>%s</span></div></header>'
+        body.append('<div><b>%s</b><span>%s</span></div>'
+                    '<button class="back" type="button">← к работе</button></header>'
                     % (esc(m.get("name", "")), esc(m.get("role", ""))))
         if not mine:
             body.append('<p class="empty">Ещё не брался за работу.</p>')
@@ -164,7 +165,7 @@ def mate_sheets(team, steps):
             else:
                 body.append('<p class="empty">Ждёт своей очереди.</p>')
             body.append("</section>")
-        out.append('<template id="sh-%d">%s</template>' % (k, "".join(body)))
+        out.append('<section class="mv" id="mv-%d" hidden>%s</section>' % (k, "".join(body)))
     return "".join(out)
 
 
@@ -176,6 +177,23 @@ def polka(steps):
             out.append('<section class="polka"><span class="lab">%s</span>%s</section>'
                        % (esc(s.get("gridlab", "что нарисовали")), grid(s["grid"])))
     return "".join(out)
+
+
+def itogi(d, steps):
+    """Общий счёт снизу: цифра появляется, когда её шаг сделан."""
+    rows = d.get("itogi") or []
+    if not rows:
+        return ""
+    done = sum(1 for s in steps if s.get("status") == "done")
+    cells = []
+    for r in rows:
+        got = done >= int(r.get("after", 1))
+        cells.append('<div class="it%s"><b>%s</b><span>%s</span></div>'
+                     % ("" if got else " wait", esc(r.get("n", "")) if got else "—",
+                        esc(r.get("t", ""))))
+    return ('<section class="itogi"><div class="itoptop"><span class="lab">что уже сделано</span>'
+            '<span class="lab">%d из %d шагов</span></div><div class="itrow">%s</div></section>'
+            % (done, len(steps), "".join(cells)))
 
 
 def plan(steps):
@@ -246,6 +264,7 @@ def build(name):
         ask=ask_block(d.get("ask")),
         now=now,
         polka=polka(steps),
+        itogi=itogi(d, steps),
         plan=plan(steps),
         fin=fin_block(d.get("fin")) if (steps and not live and done == len(steps)) else "",
     )

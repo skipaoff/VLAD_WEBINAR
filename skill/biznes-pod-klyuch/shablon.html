@@ -53,11 +53,17 @@ h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clam
 /* команда */
 .crew{margin-top:16px;background:var(--deep);border:1px solid var(--line);border-radius:16px;padding:13px 14px}
 .crewtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
-.mates{display:flex;gap:9px;overflow-x:auto;padding-bottom:3px;scrollbar-width:thin}
+.mates{display:flex;gap:9px;overflow-x:auto;overflow-y:hidden;padding:4px 2px 8px;scrollbar-width:thin}
 .mate{flex:0 0 116px;background:var(--fill);border:1px solid var(--line);border-radius:12px;
   padding:10px 8px 9px;text-align:center;cursor:pointer;color:var(--ink);font:inherit;
   display:flex;flex-direction:column;align-items:center;gap:3px;transition:.25s}
-.mate:hover{border-color:var(--hot);transform:translateY(-2px)}
+.mate:hover{border-color:var(--hot);background:rgba(255,255,255,.07)}
+.mate:focus{outline:none}
+.mate:focus-visible{border-color:var(--blue);box-shadow:0 0 0 2px rgba(61,139,255,.45)}
+.mate[aria-pressed="true"]{border-color:var(--accent);background:rgba(49,233,129,.14);
+  box-shadow:0 0 0 2px rgba(49,233,129,.55)}
+.mate[aria-pressed="true"] .st{color:var(--accent)}
+.mate[aria-pressed="true"] .st::after{content:" · открыт"}
 .face{width:52px;height:52px;border-radius:10px;image-rendering:pixelated;background:rgba(255,255,255,.05);
   filter:grayscale(1) opacity(.45);transition:.4s}
 .mate[data-s="run"] .face{filter:none;box-shadow:0 0 0 2px rgba(61,139,255,.6)}
@@ -150,21 +156,32 @@ h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clam
 .go.main{background:var(--accent);color:#04120B;border-color:transparent}
 .go.main:hover{background:#5BF0A0;color:#04120B}
 
-/* карточка человека */
-dialog{border:0;padding:0;background:transparent;max-width:min(640px,94vw);width:100%}
-dialog::backdrop{background:rgba(3,6,10,.82)}
-.sheet{background:var(--panel);border:1px solid var(--hot);border-radius:18px;padding:18px 20px 20px;
-  max-height:84vh;overflow:auto}
-.shhead{display:flex;align-items:center;gap:13px;margin-bottom:14px}
-.face.big{width:62px;height:62px;filter:none}
+/* полка человека: открывается на месте работы, не поверх экрана */
+.mv{margin-top:16px;background:linear-gradient(180deg,var(--raise),var(--panel));
+  border:1px solid rgba(49,233,129,.3);border-radius:16px;padding:15px 18px 18px;color:var(--ink)}
+.mv[hidden]{display:none}
+.shhead{display:flex;align-items:center;gap:13px;margin-bottom:6px}
+.face.big{width:56px;height:56px;filter:none}
 .shhead b{display:block;font-family:var(--disp);font-size:18px;font-weight:600;letter-spacing:-.02em}
 .shhead span{color:var(--mid);font-size:13px}
+.back{margin-left:auto;border:1px solid var(--line);background:var(--fill);color:var(--mid);cursor:pointer;
+  border-radius:9px;padding:7px 12px;font-family:var(--mono);font-size:11px;white-space:nowrap}
+.back:hover{color:var(--ink);border-color:var(--hot)}
 .shstep{border-top:1px dashed rgba(255,255,255,.1);padding-top:13px;margin-top:13px}
 .shstep h3{font-size:15px;margin:2px 0 8px;font-weight:700}
 .empty{color:var(--dim);font-size:13px;margin:0}
-.shut{position:sticky;top:0;float:right;border:0;background:var(--fill);color:var(--mid);cursor:pointer;
-  border-radius:9px;padding:6px 11px;font-family:var(--mono);font-size:11px}
-.shut:hover{color:var(--ink)}
+
+/* сводка снизу */
+.itogi{margin-top:16px;background:var(--deep);border:1px solid var(--line);border-radius:16px;
+  padding:13px 15px 15px}
+.itoptop{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
+.itrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px}
+.itrow .it{background:var(--fill);border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+.itrow .it b{display:block;font-family:var(--disp);font-size:22px;font-weight:600;letter-spacing:-.02em;
+  line-height:1.1}
+.itrow .it span{display:block;font-size:11.5px;color:var(--mid);margin-top:4px;line-height:1.3}
+.itrow .it.wait{opacity:.4}
+.itrow .it.wait b{color:var(--dim)}
 @media(max-width:620px){
   .nums{width:100%;margin-left:0}
   .mate{flex:0 0 104px}
@@ -200,17 +217,17 @@ dialog::backdrop{background:rgba(3,6,10,.82)}
   $ask
 
   $now
+  $sheets
 
   $polka
 
   $plan
 
+  $itogi
+
   $fin
 
 </div>
-
-<dialog id="dlg"><div class="sheet"><button class="shut" id="shut" type="button">закрыть</button><div id="dbody"></div></div></dialog>
-$sheets
 
 <script>
 (function(){
@@ -289,29 +306,41 @@ $sheets
     });
   }
 
-  /* карточка человека по клику */
-  var dlg = document.getElementById('dlg'), dbody = document.getElementById('dbody');
-  function open(k){
-    var tpl = document.getElementById('sh-' + k);
-    if(!tpl || !dlg) return;
-    dbody.innerHTML = '';
-    dbody.appendChild(tpl.content.cloneNode(true));
-    if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  /* нажали на человека — на месте работы показываем его карточку */
+  var mates = [].slice.call(document.querySelectorAll('.mate'));
+  var views = [].slice.call(document.querySelectorAll('.mv'));
+  var nowbox = document.getElementById('now');
+  function show(k){
+    views.forEach(function(v){ v.hidden = true; });
+    mates.forEach(function(m){ m.setAttribute('aria-pressed', 'false'); });
+    if(k === null){
+      if(nowbox) nowbox.hidden = false;
+      return;
+    }
+    var v = document.getElementById('mv-' + k);
+    if(!v) return;
+    if(nowbox) nowbox.hidden = true;
+    v.hidden = false;
+    var m = document.querySelector('.mate[data-k="' + k + '"]');
+    if(m) m.setAttribute('aria-pressed', 'true');
   }
-  [].slice.call(document.querySelectorAll('.mate')).forEach(function(el){
-    el.addEventListener('click', function(){ open(el.getAttribute('data-k')); });
+  mates.forEach(function(el){
+    el.setAttribute('aria-pressed', 'false');
+    el.addEventListener('click', function(){
+      var k = el.getAttribute('data-k');
+      show(el.getAttribute('aria-pressed') === 'true' ? null : k);
+    });
   });
-  var shut = document.getElementById('shut');
-  if(shut) shut.addEventListener('click', function(){
-    if(dlg.close) dlg.close(); else dlg.removeAttribute('open');
+  [].slice.call(document.querySelectorAll('.back')).forEach(function(b){
+    b.addEventListener('click', function(){ show(null); });
   });
 
   /* лента команды: держим в середине того, кто работает */
-  var mates = document.getElementById('mates');
+  var lenta = document.getElementById('mates');
   var cur = document.querySelector('.mate[data-s="run"]') ||
             [].slice.call(document.querySelectorAll('.mate[data-s="done"]')).pop();
-  if(mates && cur && mates.scrollWidth > mates.clientWidth){
-    mates.scrollLeft = cur.offsetLeft - mates.offsetLeft - (mates.clientWidth - cur.offsetWidth) / 2;
+  if(lenta && cur && lenta.scrollWidth > lenta.clientWidth){
+    lenta.scrollLeft = cur.offsetLeft - lenta.offsetLeft - (lenta.clientWidth - cur.offsetWidth) / 2;
   }
 
   /* страница перевыкладывается на каждом шаге: если готовых стало больше — звоним */
