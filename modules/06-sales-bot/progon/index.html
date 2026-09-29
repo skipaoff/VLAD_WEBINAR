@@ -258,8 +258,8 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
       <div id="steps"></div>
       <div class="fin" id="fin" hidden>
         <h2>Готово</h2>
-        <p>Продавец на связи в Telegram: встречает видео-кружком, отвечает по ценам клиники, записывает на время и принимает предоплату по скриншоту. Напишите ему.</p>
-        <a class="go" id="resGo" href="#" target="_blank" rel="noopener">Написать продавцу</a>
+        <p>Продавец на связи, и на сайте появилась кнопка Telegram. Жми её — откроется чат с готовым сообщением: продавец встретит кружком, назовёт цену, запишет и примет предоплату.</p>
+        <a class="go" id="resGo" href="#" target="_blank" rel="noopener">Открыть сайт с продавцом</a>
       </div>
     </section>
 
@@ -547,7 +547,7 @@ function frame(now){
 
   if(finished && el("fin").hidden){
     el("fin").hidden = false;
-    el("resGo").href = "https://t.me/vlad_ai_yasko";
+    el("resGo").href = "https://comfort-stom-3.vercel.app/";
     el("clockLab").textContent = "собрано за";
   }
   requestAnimationFrame(frame);
