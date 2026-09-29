@@ -37,12 +37,6 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
 .lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 .mark{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:4px 9px}
-.speed{display:flex;gap:5px}
-.speed button{font-family:var(--mono);font-size:11px;color:var(--mid);cursor:pointer;
-  background:transparent;border:1px solid var(--line);border-radius:999px;padding:5px 10px;transition:.2s}
-.speed button:hover{border-color:var(--line-hot);color:var(--ink)}
-.speed button[aria-pressed="true"]{color:var(--void);background:var(--accent);border-color:var(--accent)}
-.speed button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .bar{height:3px;border-radius:2px;background:var(--line);overflow:hidden;flex:1 1 100%;min-width:180px}
 .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--accent));transition:width .3s linear}
 
@@ -227,11 +221,6 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
     <div>
       <span class="lab" id="clockLab">времени прошло</span>
       <div class="clock" id="clock">0:00</div>
-    </div>
-    <div class="speed" role="group" aria-label="Скорость показа">
-      <button id="s1" aria-pressed="true">×1</button>
-      <button id="s4" aria-pressed="false">×4</button>
-      <button id="s16" aria-pressed="false">×16</button>
     </div>
     <div class="bar"><i id="prog"></i></div>
   </header>
@@ -467,12 +456,9 @@ function frame(now){
 }
 requestAnimationFrame(frame);
 
-[["s1",1],["s4",4],["s16",16]].forEach(([id,v])=>{
-  el(id).addEventListener("click",()=>{
-    speed = v;
-    ["s1","s4","s16"].forEach(x=>el(x).setAttribute("aria-pressed", x===id ? "true":"false"));
-  });
-});
+// скорость меняется только адресом: ?speed=4 — для репетиции, в кадре этого нет
+const SPEED = parseFloat(new URLSearchParams(location.search).get("speed") || "1");
+if (isFinite(SPEED) && SPEED > 0) speed = SPEED;
 </script>
 
 </body>

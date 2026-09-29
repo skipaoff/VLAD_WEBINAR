@@ -93,8 +93,8 @@ npm run tavus:set-face -- ВАШ_FACE_ID
 были корректны, у ассистента было одно имя на весь промпт, язык был заполнен известным кодом,
 а ключ читался из `.env`, а не из командной строки. `npm run verify` ищет в файлах строки, похожие на ключ.
 
-## Экран прогона и результат
+## Экран работы и результат
 
-- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video-assistant/progon/ — идёт 4:20, для репетиции добавь `?t=120`
+- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video-assistant/agent/ — идёт 4:20, для репетиции добавь `?t=120`
 - В конце: Тот же сайт, внизу видеоконсультант с лицом Влада
 - Результат: https://comfort-stom-2.vercel.app/

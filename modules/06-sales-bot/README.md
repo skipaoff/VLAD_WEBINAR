@@ -85,8 +85,8 @@ cd modules/06-sales-bot && python3 -m pytest -q tests
 На чистом шаблоне красный: в знаниях стоят метки. Зеленеет, когда файлы заполнены и в
 репозиторий не попал токен.
 
-## Экран прогона и результат
+## Экран работы и результат
 
-- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/06-sales-bot/progon/ — идёт 5:32, для репетиции добавь `?t=120`
+- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/06-sales-bot/agent/ — идёт 5:32, для репетиции добавь `?t=120`
 - В конце: Тот же сайт плюс кнопка Telegram с готовым сообщением, за ней живой продавец @vlad_ai_yasko
 - Результат: https://comfort-stom-3.vercel.app/

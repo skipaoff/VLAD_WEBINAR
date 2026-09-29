@@ -39,20 +39,20 @@
 модуль. Агент забирает модуль, задаёт три вопроса про бизнес, заполняет шаблоны и ставит
 модуль на сайт. Ключи ведущий не диктует и не показывает: они уже лежат в общем `.env` на машине.
 
-## Экраны прогона
+## Экраны работы
 
-У каждого модуля есть экран прогона — страница, на которой команда агентов по шагам делает
+У каждого модуля есть экран работы — страница, на которой команда агентов по шагам делает
 работу, а в конце появляется кнопка с готовым результатом. Страница идёт сама, ничего
 нажимать не нужно. Для репетиции добавь к адресу `?t=300` — откроется на пятой минуте.
 
 | # | Модуль | Длительность | Экран | Что в конце |
 |---|---|---|---|---|
-| 1 | Поиск клиентов | 3:02 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/01-poisk-klientov/progon/) | Список из 16 стоматологий Киева прямо на экране: у каждой кнопка «Написать» в Telegram |
-| 2 | Сайт клиники | 7:28 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/02-website/progon/) | [Готовый сайт клиники](https://comfort-stom-1.vercel.app/) |
-| 3 | Видеоконсультант | 4:20 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video-assistant/progon/) | [Тот же сайт, внизу видеоконсультант с лицом Влада](https://comfort-stom-2.vercel.app/) |
-| 4 | AI-продавец в Telegram | 5:32 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/06-sales-bot/progon/) | [Тот же сайт плюс кнопка Telegram с готовым сообщением, за ней живой продавец @vlad_ai_yasko](https://comfort-stom-3.vercel.app/) |
-| 5 | Рекламный ролик | 4:36 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/04-creatives/progon/) | Готовый ролик 39 секунд открывается прямо на экране |
-| 6 | Реклама в Facebook и Instagram | 3:42 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/05-ads/progon/) | [Запущенное объявление в рекламном кабинете](https://adsmanager.facebook.com/adsmanager) |
+| 1 | Поиск клиентов | 3:02 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/01-poisk-klientov/agent/) | Список из 16 стоматологий Киева прямо на экране: у каждой кнопка «Написать» в Telegram |
+| 2 | Сайт клиники | 7:28 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/02-website/agent/) | [Готовый сайт клиники](https://comfort-stom-1.vercel.app/) |
+| 3 | Видеоконсультант | 4:20 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video-assistant/agent/) | [Тот же сайт, внизу видеоконсультант с лицом Влада](https://comfort-stom-2.vercel.app/) |
+| 4 | AI-продавец в Telegram | 5:32 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/06-sales-bot/agent/) | [Тот же сайт плюс кнопка Telegram с готовым сообщением, за ней живой продавец @vlad_ai_yasko](https://comfort-stom-3.vercel.app/) |
+| 5 | Рекламный ролик | 4:36 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/04-creatives/agent/) | Готовый ролик 39 секунд открывается прямо на экране |
+| 6 | Реклама в Facebook и Instagram | 3:42 | [экран](https://skipaoff.github.io/VLAD_WEBINAR/modules/05-ads/agent/) | [Запущенное объявление в рекламном кабинете](https://adsmanager.facebook.com/adsmanager) |
 
 Сайт один и тот же: на втором шаге он появляется, на третьем к нему добавляется
 видеоконсультант, на четвёртом — кнопка Telegram с продавцом.
