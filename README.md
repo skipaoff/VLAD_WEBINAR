@@ -7,8 +7,12 @@
 ## Поставить скилл
 
 ```
-mkdir -p ~/.claude/skills && curl -sL https://github.com/skipaoff/VLAD_WEBINAR/archive/refs/heads/main.tar.gz | tar -xz --strip-components=2 -C ~/.claude/skills VLAD_WEBINAR-main/skill
+mkdir -p ~/.claude/skills && curl -sL https://github.com/skipaoff/biznes-pod-klyuch/archive/refs/heads/main.tar.gz | tar -xz -C ~/.claude/skills && mv ~/.claude/skills/biznes-pod-klyuch-main ~/.claude/skills/biznes-pod-klyuch
 ```
+
+Скилл живёт отдельным репозиторием — [skipaoff/biznes-pod-klyuch](https://github.com/skipaoff/biznes-pod-klyuch),
+его можно отдать человеку одной ссылкой. Здесь остались исходники модулей и
+запасные экраны.
 
 Новая сессия Claude Code подхватит его сама. Дальше пишешь человеческим текстом:
 
@@ -19,7 +23,7 @@ mkdir -p ~/.claude/skills && curl -sL https://github.com/skipaoff/VLAD_WEBINAR/a
 запускай рекламу
 ```
 
-Скилл лежит в [skill/biznes-pod-klyuch](skill/biznes-pod-klyuch/), снести — `rm -rf ~/.claude/skills/biznes-pod-klyuch`.
+Снести — `rm -rf ~/.claude/skills/biznes-pod-klyuch`.
 
 ## Четыре шага
 
