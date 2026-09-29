@@ -258,7 +258,7 @@ body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:1
       <div id="steps"></div>
       <div class="fin" id="fin" hidden>
         <h2>Готово</h2>
-        <p>Мастер готов: 39 секунд, вертикальный, с озвучкой, субтитрами и перебивками. Он же уходит в рекламу на следующем шаге.</p>
+        <p>Ролик готов: 39 секунд, вертикальный, с озвучкой, субтитрами и перебивками. Он же уходит в рекламу на следующем шаге.</p>
         <a class="go" id="resGo" href="#" target="_blank" rel="noopener">Смотреть ролик</a>
       </div>
     </section>
@@ -539,7 +539,7 @@ function frame(now){
 
   if(finished && el("fin").hidden){
     el("fin").hidden = false;
-    el("resGo").href = "#creo";
+    el("resGo").href = "https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video/rolik/";
     el("clockLab").textContent = "собрано за";
   }
   requestAnimationFrame(frame);

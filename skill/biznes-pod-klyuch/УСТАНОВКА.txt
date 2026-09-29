@@ -1,0 +1,18 @@
+Поставить скилл (одна команда, новая сессия Claude Code его увидит):
+
+  mkdir -p ~/.claude/skills && curl -sL https://github.com/skipaoff/VLAD_WEBINAR/archive/refs/heads/main.tar.gz | tar -xz --strip-components=2 -C ~/.claude/skills VLAD_WEBINAR-main/skill
+
+Проверить, что встал:
+
+  ls ~/.claude/skills/biznes-pod-klyuch
+
+Дальше в новой сессии просто пишешь обычным текстом:
+
+  вот инфа про бизнес, сделай сайт
+  сделай продавца и видеоконсультанта
+  сделай видео
+  запускай рекламу
+
+Снести:
+
+  rm -rf ~/.claude/skills/biznes-pod-klyuch
