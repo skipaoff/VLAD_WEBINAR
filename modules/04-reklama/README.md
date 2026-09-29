@@ -89,6 +89,6 @@ history/                лог запусков
 
 ## Экран работы и результат
 
-- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/05-ads/agent/ — идёт 3:42, для репетиции добавь `?t=120`
-- В конце: Запущенное объявление в рекламном кабинете
-- Результат: https://adsmanager.facebook.com/adsmanager
+- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/04-reklama/agent/ — идёт 3:42, для репетиции добавь `?t=120`
+- Результат: https://skipaoff.github.io/VLAD_WEBINAR/modules/04-reklama/obyavlenie/ — само объявление
+- Команда в эфире: «запускай рекламу»

@@ -95,6 +95,8 @@ npm run tavus:set-face -- ВАШ_FACE_ID
 
 ## Экран работы и результат
 
-- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video-assistant/agent/ — идёт 4:20, для репетиции добавь `?t=120`
-- В конце: Тот же сайт, внизу видеоконсультант с лицом Влада
-- Результат: https://comfort-stom-2.vercel.app/
+Видеоконсультант и продавец в Telegram — один шаг эфира с общим экраном.
+
+- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/02-prodavec/agent/ — идёт 5:44, для репетиции добавь `?t=200`
+- Результат: https://comfort-stom-2.vercel.app/ — тот же сайт, но с кнопкой звонка и Telegram
+- Команда в эфире: «сделай продавца и видеоконсультанта»

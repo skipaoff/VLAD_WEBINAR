@@ -59,5 +59,6 @@ higgsfield generate create nano_banana_pro \
 
 ## Экран работы и результат
 
-- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/04-creatives/agent/ — идёт 4:36, для репетиции добавь `?t=120`
-- В конце: Готовый ролик 39 секунд открывается прямо на экране
+- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video/agent/ — идёт 4:36, для репетиции добавь `?t=120`
+- Результат: https://skipaoff.github.io/VLAD_WEBINAR/modules/03-video/rolik/ — готовый ролик
+- Команда в эфире: «сделай видео»

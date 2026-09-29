@@ -87,6 +87,8 @@ cd modules/06-sales-bot && python3 -m pytest -q tests
 
 ## Экран работы и результат
 
-- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/06-sales-bot/agent/ — идёт 5:32, для репетиции добавь `?t=120`
-- В конце: Тот же сайт плюс кнопка Telegram с готовым сообщением, за ней живой продавец @vlad_ai_yasko
-- Результат: https://comfort-stom-3.vercel.app/
+Продавец в Telegram и видеоконсультант — один шаг эфира с общим экраном.
+
+- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/02-prodavec/agent/ — идёт 5:44, для репетиции добавь `?t=200`
+- Результат: https://comfort-stom-2.vercel.app/ — тот же сайт, но с кнопкой звонка и Telegram
+- Команда в эфире: «сделай продавца и видеоконсультанта»
