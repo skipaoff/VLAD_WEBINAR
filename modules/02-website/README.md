@@ -76,3 +76,9 @@ klient/foto/       сюда фотографии клиники
 
 Сайт, собранный этим способом:
 https://svettutest.github.io/shablony-demo/stomatologia/
+
+## Экран прогона и результат
+
+- Экран: https://skipaoff.github.io/VLAD_WEBINAR/modules/02-website/progon/ — идёт 7:28, для репетиции добавь `?t=120`
+- В конце: Готовый сайт клиники
+- Результат: https://comfort-stom-1.vercel.app/
