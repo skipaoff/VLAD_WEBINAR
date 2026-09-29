@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$title</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --void:#06090D; --deep:#0B1017; --panel:#141A23; --raise:#1B2331;
+  --line:rgba(255,255,255,.10); --hot:rgba(255,255,255,.20); --fill:rgba(255,255,255,.04);
+  --ink:#F4F2EC; --mid:#93A0AE; --dim:#5E6B79;
+  --accent:#31E981; --blue:#3D8BFF; --amber:#FFB02E;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,monospace;
+  --disp:Unbounded,Manrope,system-ui,sans-serif;
+  --body:Manrope,system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(900px 480px at 10% -10%,rgba(49,233,129,.07),transparent 60%),
+                   radial-gradient(760px 460px at 92% -4%,rgba(61,139,255,.07),transparent 60%)}
+.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 44px}
+.lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* шапка */
+.top{background:linear-gradient(180deg,var(--raise),var(--panel));border:1px solid var(--line);
+  border-radius:16px;padding:16px 18px}
+.trow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.state{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(49,233,129,.3);
+  background:rgba(49,233,129,.08);border-radius:999px;padding:5px 11px}
+.state i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.wrap[data-live="1"] .state i{animation:blink 1.6s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.snd{margin-left:auto;border:1px solid var(--line);background:var(--fill);color:var(--mid);cursor:pointer;
+  border-radius:999px;padding:6px 12px;font-family:var(--mono);font-size:10px;letter-spacing:.1em}
+.snd[data-on="1"]{color:var(--accent);border-color:rgba(49,233,129,.4)}
+h1{font-family:var(--disp);font-weight:600;letter-spacing:-.025em;font-size:clamp(21px,3.2vw,30px);
+  margin:12px 0 4px;line-height:1.12}
+.who{color:var(--mid);font-size:14px;margin:0}
+.who a{color:var(--blue);text-decoration:none}
+.nums{display:flex;gap:22px;align-items:baseline;margin-left:auto}
+.num{font-family:var(--mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.num small{display:block;font-family:var(--body);font-size:10px;color:var(--dim);font-weight:400;letter-spacing:0}
+.bar{height:3px;border-radius:2px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:14px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));
+  transition:width .6s cubic-bezier(.3,1,.4,1)}
+
+/* команда */
+.crew{margin-top:16px;background:var(--deep);border:1px solid var(--line);border-radius:16px;padding:13px 14px}
+.crewtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
+.mates{display:flex;gap:9px;overflow-x:auto;padding-bottom:3px;scrollbar-width:thin}
+.mate{flex:0 0 116px;background:var(--fill);border:1px solid var(--line);border-radius:12px;
+  padding:10px 8px 9px;text-align:center;cursor:pointer;color:var(--ink);font:inherit;
+  display:flex;flex-direction:column;align-items:center;gap:3px;transition:.25s}
+.mate:hover{border-color:var(--hot);transform:translateY(-2px)}
+.face{width:52px;height:52px;border-radius:10px;image-rendering:pixelated;background:rgba(255,255,255,.05);
+  filter:grayscale(1) opacity(.45);transition:.4s}
+.mate[data-s="run"] .face{filter:none;box-shadow:0 0 0 2px rgba(61,139,255,.6)}
+.mate[data-s="done"] .face{filter:none}
+.mate[data-s="run"]{border-color:rgba(61,139,255,.5);background:rgba(61,139,255,.08)}
+.mate[data-s="done"]{border-color:rgba(49,233,129,.25)}
+.mate b{font-size:12px;font-weight:700;line-height:1.2}
+.mate .role{font-size:10.5px;color:var(--dim);line-height:1.25}
+.mate .st{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--dim);margin-top:2px}
+.mate[data-s="run"] .st{color:var(--blue)}
+.mate[data-s="done"] .st{color:var(--accent)}
+.mate.justdone{animation:pop .9s ease}
+@keyframes pop{0%{transform:scale(1)}25%{transform:scale(1.06)}100%{transform:scale(1)}}
+
+/* вопрос человеку */
+.ask{margin-top:16px;background:rgba(61,139,255,.07);border:1px solid rgba(61,139,255,.28);
+  border-radius:16px;padding:14px 16px}
+.qrow{display:flex;gap:14px;justify-content:space-between;align-items:baseline;padding:7px 0;
+  border-bottom:1px dashed rgba(255,255,255,.08);font-size:14px}
+.qrow:last-child{border:0;padding-bottom:0}
+.qrow .q{color:var(--mid)}
+.qrow .a{font-family:var(--mono);font-size:13px;color:var(--ink);text-align:right}
+.qrow.wait .a{color:var(--dim)}
+
+/* текущий шаг */
+.now{margin-top:16px;background:linear-gradient(180deg,var(--raise),var(--panel));
+  border:1px solid var(--line);border-radius:16px;padding:15px 18px 18px}
+.wrap[data-live="1"] .now{border-color:rgba(61,139,255,.35)}
+.nowtop{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.no{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.pill{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  border-radius:999px;padding:3px 9px;border:1px solid var(--line);color:var(--mid)}
+.pill[data-s="run"]{color:var(--blue);border-color:rgba(61,139,255,.45);background:rgba(61,139,255,.1)}
+.pill[data-s="done"]{color:var(--accent);border-color:rgba(49,233,129,.4);background:rgba(49,233,129,.09)}
+.now h2{font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:-.02em;margin:0 0 6px}
+.now .sub{margin:0 0 10px;color:var(--mid);font-size:13.5px}
+.say{margin:0 0 12px;font-size:15px;color:#E7E4DC}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:11px}
+.chip{font-family:var(--mono);font-size:10.5px;color:#DDD9D1;background:var(--fill);
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.polka{margin-top:16px;background:var(--deep);border:1px solid var(--line);
+  border-radius:16px;padding:13px 15px 4px}
+.polka .grid{margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:9px;margin-bottom:12px}
+.tile{margin:0;background:var(--fill);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.tile img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+.tile.empty{border-style:dashed}
+.tile .hole{display:grid;place-items:center;aspect-ratio:4/5;font-family:var(--mono);font-size:10px;
+  color:var(--dim);text-align:center;padding:10px}
+.tile figcaption{font-size:11px;color:var(--mid);padding:7px 9px 8px;line-height:1.3}
+.shot.hole{display:grid;place-items:center;min-height:190px;border-style:dashed;
+  font-family:var(--mono);font-size:11.5px;color:var(--dim);text-align:center;padding:16px}
+.items{list-style:none;margin:0 0 11px;padding:0;display:flex;flex-direction:column;gap:6px}
+.items li{font-size:13.5px;color:var(--mid);display:flex;gap:9px}
+.items li::before{content:"✓";color:var(--accent);font-family:var(--mono);font-size:11px}
+.log{list-style:none;margin:0;padding:10px 0 0;border-top:1px dashed rgba(255,255,255,.08);
+  display:flex;flex-direction:column;gap:5px}
+.log li{font-family:var(--mono);font-size:11.5px;color:var(--dim);display:flex;gap:9px;
+  transition:opacity .45s ease,transform .45s ease}
+.log li::before{content:"·";color:var(--blue)}
+.log li.hid{opacity:0;transform:translateY(4px)}
+.work{display:flex;align-items:center;gap:9px;margin-top:12px;font-family:var(--mono);
+  font-size:11px;color:var(--blue)}
+.work i{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:blink 1.1s infinite}
+
+/* план */
+.plan{list-style:none;margin:16px 0 0;padding:13px 15px;background:var(--deep);
+  border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;gap:2px}
+.plan li{display:flex;align-items:baseline;gap:11px;padding:6px 0;font-size:13.5px;color:var(--dim);
+  border-bottom:1px dashed rgba(255,255,255,.06)}
+.plan li:last-child{border:0}
+.plan li[data-s="done"]{color:var(--ink)}
+.plan li[data-s="run"]{color:var(--ink)}
+.plan li span:nth-child(2){flex:1}
+.plan li em{font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim)}
+.plan li[data-s="done"] em{color:var(--accent)}
+.plan li[data-s="run"] em{color:var(--blue)}
+
+/* готово */
+.fin{margin-top:16px;background:linear-gradient(135deg,rgba(49,233,129,.12),rgba(61,139,255,.07));
+  border:1px solid rgba(49,233,129,.3);border-radius:18px;padding:20px 20px 22px}
+.fin h2{font-family:var(--disp);font-size:22px;font-weight:600;letter-spacing:-.02em;margin:9px 0 8px}
+.fin p{margin:0;color:#DDD9D1;max-width:640px}
+.shot{display:block;width:100%;border-radius:12px;border:1px solid var(--line);margin-top:14px}
+.gos{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.go{display:inline-flex;align-items:center;text-decoration:none;border-radius:11px;padding:10px 15px;
+  font-size:13.5px;font-weight:600;border:1px solid var(--hot);color:var(--ink);background:var(--fill)}
+.go:hover{border-color:var(--accent);color:var(--accent)}
+.go.main{background:var(--accent);color:#04120B;border-color:transparent}
+.go.main:hover{background:#5BF0A0;color:#04120B}
+
+/* карточка человека */
+dialog{border:0;padding:0;background:transparent;max-width:min(640px,94vw);width:100%}
+dialog::backdrop{background:rgba(3,6,10,.82)}
+.sheet{background:var(--panel);border:1px solid var(--hot);border-radius:18px;padding:18px 20px 20px;
+  max-height:84vh;overflow:auto}
+.shhead{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+.face.big{width:62px;height:62px;filter:none}
+.shhead b{display:block;font-family:var(--disp);font-size:18px;font-weight:600;letter-spacing:-.02em}
+.shhead span{color:var(--mid);font-size:13px}
+.shstep{border-top:1px dashed rgba(255,255,255,.1);padding-top:13px;margin-top:13px}
+.shstep h3{font-size:15px;margin:2px 0 8px;font-weight:700}
+.empty{color:var(--dim);font-size:13px;margin:0}
+.shut{position:sticky;top:0;float:right;border:0;background:var(--fill);color:var(--mid);cursor:pointer;
+  border-radius:9px;padding:6px 11px;font-family:var(--mono);font-size:11px}
+.shut:hover{color:var(--ink)}
+@media(max-width:620px){
+  .nums{width:100%;margin-left:0}
+  .mate{flex:0 0 104px}
+}
+</style>
+</head>
+<body>
+<div class="wrap" data-live="$live" data-done="$done">
+
+  <header class="top">
+    <div class="trow">
+      <span class="state"><i></i>$state</span>
+      <button class="snd" id="snd" type="button" data-on="0"><span>включить звук</span></button>
+    </div>
+    <div class="trow" style="align-items:flex-end">
+      <div>
+        <h1>$title</h1>
+        <p class="who">$who</p>
+      </div>
+      <div class="nums">
+        <div class="num" id="clock" data-from="$elapsed">00:00<small>в работе</small></div>
+        <div class="num">$done/$total<small>шагов</small></div>
+      </div>
+    </div>
+    <div class="bar"><i style="width:$pct%"></i></div>
+  </header>
+
+  <section class="crew">
+    <div class="crewtop"><span class="lab">кто работает</span><span class="lab">нажми на любого</span></div>
+    <div class="mates" id="mates">$mates</div>
+  </section>
+
+  $ask
+
+  $now
+
+  $polka
+
+  $plan
+
+  $fin
+
+</div>
+
+<dialog id="dlg"><div class="sheet"><button class="shut" id="shut" type="button">закрыть</button><div id="dbody"></div></div></dialog>
+$sheets
+
+<script>
+(function(){
+  var wrap = document.querySelector('.wrap');
+  var live = wrap.getAttribute('data-live') === '1';
+
+  /* часы идут, пока идёт работа */
+  var cl = document.getElementById('clock');
+  if(cl){
+    var s = parseInt(cl.getAttribute('data-from') || '0', 10);
+    var p = function(n){ return (n < 10 ? '0' : '') + n; };
+    var small = cl.querySelector('small');
+    var tick = function(){
+      cl.firstChild.nodeValue = p(Math.floor(s / 60)) + ':' + p(s % 60);
+      s += 1;
+    };
+    tick();
+    if(live) setInterval(tick, 1000);
+    else if(small) small.textContent = 'заняло';
+  }
+
+  /* звук синтезируем на месте: файлов нет — нечему не загрузиться */
+  var actx = null, on = false;
+  var store = function(k, v){
+    try{ if(v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); }
+    catch(e){ return null; }
+  };
+  function ctx(){
+    if(!actx){
+      var C = window.AudioContext || window.webkitAudioContext;
+      if(!C) return null;
+      actx = new C();
+    }
+    if(actx.state === 'suspended') actx.resume();
+    return actx;
+  }
+  function note(freq, at, len, vol){
+    var a = ctx(); if(!a) return;
+    var o = a.createOscillator(), g = a.createGain();
+    o.type = 'triangle';
+    o.frequency.setValueAtTime(freq, a.currentTime + at);
+    g.gain.setValueAtTime(0, a.currentTime + at);
+    g.gain.linearRampToValueAtTime(vol, a.currentTime + at + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + at + len);
+    o.connect(g); g.connect(a.destination);
+    o.start(a.currentTime + at); o.stop(a.currentTime + at + len + 0.05);
+  }
+  function play(kind){
+    if(!on) return;
+    if(kind === 'done'){ note(659.25, 0, .18, .16); note(830.61, .09, .18, .14); note(987.77, .18, .34, .12); }
+    else if(kind === 'final'){ note(523.25, 0, .5, .15); note(659.25, .1, .5, .13);
+                               note(783.99, .2, .5, .12); note(1046.5, .3, .7, .11); }
+    else { note(880, 0, .09, .08); }
+  }
+  var btn = document.getElementById('snd');
+  if(btn){
+    on = store('ek_snd') === '1';
+    btn.setAttribute('data-on', on ? '1' : '0');
+    btn.querySelector('span').textContent = on ? 'звук включён' : 'включить звук';
+    btn.addEventListener('click', function(){
+      on = !on;
+      store('ek_snd', on ? '1' : '0');
+      btn.setAttribute('data-on', on ? '1' : '0');
+      btn.querySelector('span').textContent = on ? 'звук включён' : 'включить звук';
+      if(on) play('step');
+    });
+  }
+
+  /* строчки работы проявляются по одной, пока шаг идёт */
+  var now = document.getElementById('now');
+  if(now && live){
+    var dur = parseInt(now.getAttribute('data-dur') || '20', 10) * 1000;
+    [].slice.call(now.querySelectorAll('.log li')).forEach(function(li){
+      var at = parseFloat(li.getAttribute('data-at') || '0') * dur;
+      setTimeout(function(){ li.classList.remove('hid'); }, at);
+    });
+  }
+
+  /* карточка человека по клику */
+  var dlg = document.getElementById('dlg'), dbody = document.getElementById('dbody');
+  function open(k){
+    var tpl = document.getElementById('sh-' + k);
+    if(!tpl || !dlg) return;
+    dbody.innerHTML = '';
+    dbody.appendChild(tpl.content.cloneNode(true));
+    if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  [].slice.call(document.querySelectorAll('.mate')).forEach(function(el){
+    el.addEventListener('click', function(){ open(el.getAttribute('data-k')); });
+  });
+  var shut = document.getElementById('shut');
+  if(shut) shut.addEventListener('click', function(){
+    if(dlg.close) dlg.close(); else dlg.removeAttribute('open');
+  });
+
+  /* лента команды: держим в середине того, кто работает */
+  var mates = document.getElementById('mates');
+  var cur = document.querySelector('.mate[data-s="run"]') ||
+            [].slice.call(document.querySelectorAll('.mate[data-s="done"]')).pop();
+  if(mates && cur && mates.scrollWidth > mates.clientWidth){
+    mates.scrollLeft = cur.offsetLeft - mates.offsetLeft - (mates.clientWidth - cur.offsetWidth) / 2;
+  }
+
+  /* страница перевыкладывается на каждом шаге: если готовых стало больше — звоним */
+  var done = parseInt(wrap.getAttribute('data-done') || '0', 10);
+  var was = parseInt(store('ek_done') || '-1', 10);
+  store('ek_done', String(done));
+  if(was >= 0 && done > was){
+    var last = [].slice.call(document.querySelectorAll('.mate[data-s="done"]')).pop();
+    if(last){
+      last.classList.add('justdone');
+      setTimeout(function(){ last.classList.remove('justdone'); }, 900);
+    }
+    play(live ? 'done' : 'final');
+  }
+})();
+</script>
+</body>
+</html>

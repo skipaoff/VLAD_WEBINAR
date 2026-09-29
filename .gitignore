@@ -25,3 +25,4 @@ modules/05-ads/build/*
 modules/05-ads/cache/*
 !modules/05-ads/cache/.gitkeep
 modules/05-ads/history/*.md
+skill/biznes-pod-klyuch/build/
